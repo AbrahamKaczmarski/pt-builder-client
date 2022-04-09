@@ -4,8 +4,13 @@
             "HeadingSignIn": "Sign in",
             "InputEmail": "Email",
             "InputPassword": "Password",
-            "ButtonLogin": "Log in"
+            "ButtonLogin": "Log in",
+            "ErrorLoginRequired": "Login cannot be left empty",
+            "ErrorPasswordRequired": "Password cannot be left empty"
         },
-        "Register": {}
+        "Register": {},
+        "AuthLogo": {
+            "TextCommunity": "<0>Sign in</0> or <1>join</1> the community!"
+        }
     }
 }

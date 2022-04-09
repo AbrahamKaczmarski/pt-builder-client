@@ -1,7 +1,7 @@
 .header {
-    height: 4em;
+    padding-block-start: 1em;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 1em;
 }
 
@@ -9,4 +9,8 @@
     justify-content: right;
     align-items: flex-end;
     padding-inline: 12em;
+}
+
+.logo {
+  height: 2em;
 }

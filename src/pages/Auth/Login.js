@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGlobal, useStyles } from '../../hooks'
-import AuthLogo from './AuthLogo'
+import AuthNav from './AuthNav'
 import styles from './Auth.module.css'
 import { useTranslation } from 'react-i18next'
 import { useForm } from 'react-hook-form'
@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <main className={s('', 'layout login')}>
-      <AuthLogo />
+      <AuthNav register />
       <section className='card'>
         <div className='card-header'>
           <h2>{t('HeadingSignIn')}</h2>

@@ -125,12 +125,11 @@ main {
   border: none;
   border-block-end: solid 2px var(--input-state, var(--c-neutral-300));
   outline: none;
-  cursor: pointer;
 }
 
 .input-field:not(:focus):placeholder-shown + .input-label {
   transform: translateY(100%);
-  cursor: pointer;
+  cursor: text;
 }
 
 .input-field::placeholder {

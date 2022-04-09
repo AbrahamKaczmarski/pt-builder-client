@@ -3,7 +3,7 @@ import React from 'react'
 const Home = () => {
   return (
     <main className='card main'>
-        <h2>Home</h2>
+      <h2>Home</h2>
     </main>
   )
 }

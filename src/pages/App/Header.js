@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import styles from './App.module.css'
 
 import { useGlobal, useStyles } from '../../hooks'
+import { LogoInlineImg } from '../../assets/img'
 
 const exclusions = ['/login', '/register']
 
@@ -24,9 +25,13 @@ const Header = () => {
 
   return (
     <header className={s('', 'header')}>
-      <h1>
-        <Link to='/'>PokeTeam Builder</Link>
-      </h1>
+      <div>
+        <h1>
+          <Link to='/'>
+            <img className={s('', 'logo')} src={LogoInlineImg} />
+          </Link>
+        </h1>
+      </div>
       <p>
         {user ? (
           <button className='inline-btn' onClick={signOut}>

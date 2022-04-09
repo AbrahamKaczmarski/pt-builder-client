@@ -11,3 +11,7 @@
 .layout > section {
     width: 20vw;
 }
+
+.logo {
+  text-align: center;
+}
