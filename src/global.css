@@ -21,7 +21,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: 0;
+  box-sizing: border-box;
 }
 
 html,
@@ -41,11 +41,33 @@ main {
   flex: 1;
 }
 
+p > svg {
+  height: 1em;
+}
+
 /* # === Layouts === # */
 
 .main {
   width: clamp(480px, calc(80vw - 8rem), 960px);
   margin: 0 auto;
+}
+
+/* # === Utils === # */
+
+.filler {
+  flex: 1;
+}
+
+.collapsed {
+  display: none;
+}
+
+.test > * {
+  box-shadow: 0 0 1em 2px red;
+}
+
+.wrapper {
+  display: contents;
 }
 
 /* # === Components === # */
@@ -83,7 +105,17 @@ main {
   padding-inline: 3em;
   background-color: var(--card-bg, var(--c-white));
   border-radius: 0.5rem;
-  box-shadow: 0 0 1em var(--c-neutral-100);
+  box-shadow: 0 0 1em var(--card-shadow, var(--c-neutral-100));
+}
+
+.card.main {
+  --card-bg: var(--c-neutral-100);
+  --card-shadow: var(var(--c-neutral-300))
+}
+
+.card.small {
+  padding-block: 1em;
+  padding-inline: 1em;
 }
 
 .card-header {
@@ -152,4 +184,22 @@ main {
   display: flex;
   justify-content: center;
   margin-block: 2em 1em;
+}
+
+/* -- Links -- */
+
+.link {
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+  color: var(--c-link, var(--c-secondary-500));
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: var(--c-link-hover, var(--c-secondary-700));
+}
+
+.link:active {
+  color: var(--c-link-active, var(--c-accent-500));
 }

@@ -1,16 +1,66 @@
 .header {
-    padding-block-start: 1em;
-    display: flex;
-    align-items: center;
-    gap: 1em;
+  width: clamp(480px, calc(80vw - 8rem), 960px);
+  margin: 0 auto;
+  padding-block: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
 }
 
 .header.clean {
-    justify-content: right;
-    align-items: flex-end;
-    padding-inline: 12em;
+  justify-content: right;
+  transform: translateY(2rem);
 }
 
 .logo {
   height: 2em;
+}
+
+/* -- Nav -- */
+
+.nav {
+  display: flex;
+  gap: 0.5em;
+}
+
+.nav > a {
+  display: contents;
+}
+
+.nav-link {
+  display: grid;
+  place-items: center;
+  block-size: 4em;
+  inline-size: 4em;
+  background-color: var(--nav-bg);
+  color: var(--nav-fg);
+  border-radius: 9999px;
+  cursor: pointer;
+  --nav-bg: var(--c-secondary-500);
+  --nav-fg: var(--c-white);
+}
+
+.nav-link:hover {
+  --nav-bg: var(--c-secondary-700);
+}
+
+.nav-link:active {
+  --nav-bg: var(--c-accent-500);
+}
+
+.nav-link.primary {
+  --nav-bg: var(--c-primary-500);
+}
+
+.nav-link.primary:hover {
+  --nav-bg: var(--c-primary-700);
+}
+
+.nav-link.primary:active {
+  --nav-bg: var(--c-accent-500);
+}
+
+.nav-link svg {
+  height: 45%;
 }

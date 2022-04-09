@@ -32,7 +32,7 @@ const Login = () => {
   return (
     <main className={s('', 'layout login')}>
       <AuthNav register />
-      <section className='card'>
+      <section className={s('card', 'form')}>
         <div className='card-header'>
           <h2>{t('HeadingSignIn')}</h2>
         </div>
@@ -47,7 +47,7 @@ const Login = () => {
                 className='input-field'
                 id='email'
                 placeholder={t('InputEmail')}
-                {...register('email', { required: t('ErrorLoginRequired') })}
+                {...register('email', { required: t('ErrorRequired', {field: 'Email'}) })}
               />
               <p className='input-label'>{t('InputEmail')}</p>
               <p className='input-error'>{errors?.email?.message}</p>
@@ -62,7 +62,7 @@ const Login = () => {
                 id='password'
                 placeholder={t('InputPassword')}
                 {...register('password', {
-                  required: t('ErrorPasswordRequired')
+                  required: t('ErrorRequired', {field: 'Password'})
                 })}
               />
               <p className='input-label'>{t('InputPassword')}</p>

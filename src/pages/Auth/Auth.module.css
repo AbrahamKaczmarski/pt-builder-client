@@ -8,10 +8,11 @@
   flex-direction: row-reverse;
 }
 
-.layout > section {
-    width: 20vw;
+.form {
+  width: 30vw;
 }
 
 .logo {
+  width: 20vw;
   text-align: center;
 }

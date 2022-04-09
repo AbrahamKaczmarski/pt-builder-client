@@ -1,0 +1,5 @@
+export { ReactComponent as ExitIcon } from './exit.svg'
+export { ReactComponent as ListIcon } from './list.svg'
+export { ReactComponent as PenIcon } from './pen.svg'
+export { ReactComponent as PlusIcon } from './plus.svg'
+export { ReactComponent as UserIcon } from './user.svg'

@@ -21,8 +21,8 @@ const AuthNav = ({ login, register }) => {
         t={t}
         i18nKey='TextCommunity'
         components={[
-          login && <Link to='/login' />,
-          register && <Link to='/register' />
+          login && <Link to='/login' className='link'/>,
+          register && <Link to='/register' className='link'/>
         ]}
       />
     </section>

@@ -1,16 +1,29 @@
 {
     "Auth": {
         "Login": {
+            "ButtonLogin": "Log in",
+            "ErrorRequired": "{{field}} cannot be left empty",
             "HeadingSignIn": "Sign in",
             "InputEmail": "Email",
-            "InputPassword": "Password",
-            "ButtonLogin": "Log in",
-            "ErrorLoginRequired": "Login cannot be left empty",
-            "ErrorPasswordRequired": "Password cannot be left empty"
+            "InputPassword": "Password"
         },
-        "Register": {},
+        "Register": {
+            "ButtonLogin": "Log in",
+            "ButtonRegister": "Register",
+            "ErrorRequired": "{{field}} cannot be left empty",
+            "HeadingRegister": "Create an account",
+            "InputConfirmPassword": "Confirm password",
+            "InputEmail": "Email",
+            "InputPassword": "Password",
+            "InputUsername": "Username"
+        },
         "AuthLogo": {
             "TextCommunity": "<0>Sign in</0> or <1>join</1> the community!"
         }
+    },
+    "Home": {
+        "HeadingTeamBuilder": "Team Builder",
+        "HeadingEnemyTeam": "Enemy Team",
+        "HeadingOptions": "Options"
     }
 }
