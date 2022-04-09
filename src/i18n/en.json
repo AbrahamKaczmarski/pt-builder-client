@@ -1,0 +1,11 @@
+{
+    "Auth": {
+        "Login": {
+            "HeadingSignIn": "Sign in",
+            "InputEmail": "Email",
+            "InputPassword": "Password",
+            "ButtonLogin": "Log in"
+        },
+        "Register": {}
+    }
+}

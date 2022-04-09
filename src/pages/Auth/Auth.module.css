@@ -1,0 +1,13 @@
+.layout {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.layout.login {
+  flex-direction: row-reverse;
+}
+
+.layout > section {
+    width: 20vw;
+}

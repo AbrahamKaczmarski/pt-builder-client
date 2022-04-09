@@ -24,9 +24,11 @@
   box-sizing: 0;
 }
 
-html, body {
+html,
+body {
   background-color: var(--c-neutral-50);
   font-family: Mitr;
+  color: var(--c-neutral-700);
 }
 
 #root {
@@ -37,6 +39,118 @@ html, body {
 
 main {
   flex: 1;
-  background-color: var(--c-neutral-300);
 }
 
+/* # === Layouts === # */
+
+.main {
+  width: clamp(480px, calc(80vw - 8rem), 960px);
+  margin: 0 auto;
+}
+
+/* # === Components === # */
+
+/* -- Buttons -- */
+
+.btn {
+  padding-block: 0.75em;
+  padding-inline: 3em;
+  background-color: var(--btn-bg, var(--c-neutral-500));
+  color: var(--btn-fg, var(--c-white));
+  font-family: Mitr;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn.primary {
+  --btn-bg: var(--c-primary-500);
+}
+
+.btn.primary:hover {
+  --btn-bg: var(--c-primary-700);
+}
+
+.btn.primary:active {
+  --btn-bg: var(--c-accent-500);
+  --btn-fg: var(--c-neutral-700);
+}
+
+/* -- Cards -- */
+
+.card {
+  padding-block: 2em;
+  padding-inline: 3em;
+  background-color: var(--card-bg, var(--c-white));
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1em var(--c-neutral-100);
+}
+
+.card-header {
+  margin-block-end: 1em;
+}
+
+/* -- Forms -- */
+
+.form-item:focus-within {
+  --input-state: var(--c-secondary-500);
+}
+
+.form-item.invalid:not(:focus-within) {
+  --input-state: var(--c-error-500);
+}
+
+.form-item.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item + .form-item {
+  margin-block-start: 0.5em;
+}
+
+.input-label {
+  order: 1;
+  color: var(--input-state, var(--c-neutral-500));
+  transform-origin: left;
+  transition: 150ms ease-out;
+  user-select: none;
+}
+
+.input-field {
+  order: 2;
+  padding-block: 0.5em;
+  color: var(--c-neutral-700);
+  font-family: Mitr;
+  border: none;
+  border-block-end: solid 2px var(--input-state, var(--c-neutral-300));
+  outline: none;
+  cursor: pointer;
+}
+
+.input-field:not(:focus):placeholder-shown + .input-label {
+  transform: translateY(100%);
+  cursor: pointer;
+}
+
+.input-field::placeholder {
+  color: transparent;
+}
+
+.input-error {
+  order: 3;
+  margin-block-start: 0.5em;
+  font-size: 0.75em;
+  color: var(--c-error-500);
+  display: none;
+}
+
+.invalid > .input-error {
+  display: block;
+}
+
+.form-item.controls {
+  display: flex;
+  justify-content: center;
+  margin-block: 2em 1em;
+}

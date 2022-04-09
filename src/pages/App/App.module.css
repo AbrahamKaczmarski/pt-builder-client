@@ -1,0 +1,12 @@
+.header {
+    height: 4em;
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+}
+
+.header.clean {
+    justify-content: right;
+    align-items: flex-end;
+    padding-inline: 12em;
+}

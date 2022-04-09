@@ -1,9 +1,79 @@
 import React from 'react'
+import { useGlobal, useStyles } from '../../hooks'
+import AuthLogo from './AuthLogo'
+import styles from './Auth.module.css'
+import { useTranslation } from 'react-i18next'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const s = useStyles(styles)
+  const { t } = useTranslation(null, { keyPrefix: 'Auth.Login' })
+  const navigate = useNavigate()
+  const { signIn } = useGlobal()
+
+  // -- Form
+  const {
+    handleSubmit,
+    formState: { errors },
+    register
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  })
+
+  // -- Login action
+  const onSubmit = data => {
+    signIn(data.email, data.password).then(() => navigate('/'))
+  }
+
   return (
-    <main>
-      <h2>Login</h2>
+    <main className={s('', 'layout login')}>
+      <AuthLogo />
+      <section className='card'>
+        <div className='card-header'>
+          <h2>{t('HeadingSignIn')}</h2>
+        </div>
+        <div className='card-body'>
+          <form className='form' onSubmit={handleSubmit(onSubmit)}>
+            <label
+              htmlFor='email'
+              className={`form-item input ${errors.email && 'invalid'}`}
+            >
+              <input
+                type='text'
+                className='input-field'
+                id='email'
+                placeholder={t('InputEmail')}
+                {...register('email', { required: t('ErrorLoginRequired') })}
+              />
+              <p className='input-label'>{t('InputEmail')}</p>
+              <p className='input-error'>{errors?.email?.message}</p>
+            </label>
+            <label
+              htmlFor='password'
+              className={`form-item input ${errors.password && 'invalid'}`}
+            >
+              <input
+                type='password'
+                className='input-field'
+                id='password'
+                placeholder={t('InputPassword')}
+                {...register('password', {
+                  required: t('ErrorPasswordRequired')
+                })}
+              />
+              <p className='input-label'>{t('InputPassword')}</p>
+              <p className='input-error'>{errors?.password?.message}</p>
+            </label>
+            <div className='form-item controls'>
+              <button className='btn primary'>{t('ButtonLogin')}</button>
+            </div>
+          </form>
+        </div>
+      </section>
     </main>
   )
 }
