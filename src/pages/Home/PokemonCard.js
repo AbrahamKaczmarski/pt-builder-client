@@ -1,63 +1,67 @@
-import { t } from 'i18next'
 import React from 'react'
 import { useStyles } from '../../hooks'
 
 import styles from './Home.module.css'
+
+import {PlusIcon} from '../../assets/icons'
 
 const PokemonCard = ({ pokemon, idx }) => {
   const s = useStyles(styles)
 
   if (!pokemon) {
     return (
-      <div className={s('card', 'pokemon-card empty')}>
+      <div className={s('pokemon-card empty', 'card')}>
         <p>+</p>
       </div>
     )
   }
 
   return (
-    <div className={s('card small', 'pokemon-card')}>
-      <header className='card-header'>
+    <div className={s('pokemon-card', 'card small')}>
+      <header className={s('card-header', 'card-header')}>
         <p>{pokemon.name}</p>
+        <div>
+          <PlusIcon className={s('icon-close')} />
+        </div>
       </header>
       <div className='card-body'>
-        <div className={s('', 'pokemon-data')}>
+        <div className={s('pokemon-data')}>
           <div>
-            <div className={s('', 'pokemon-icon')}>
+            <div className={s('pokemon-icon')}>
               <img src={pokemon.image} alt={pokemon.name} />
             </div>
           </div>
-          <div>
+          <div className={s('pokemon-settings')}>
             <label
               htmlFor={`p${idx + 1}-setting1`}
-              className={s('', 'setting')}
+              className={s('setting')}
             >
-              <p className={s('', 'setting-label')}>Setting 1</p>
+              <p className={s('setting-label')}>Test</p>
               <input
                 type='text'
-                className={s('', 'setting-input')}
+                className={s('setting-input')}
                 id={`p${idx + 1}-setting1`}
               />
             </label>
             <label
               htmlFor={`p${idx + 1}-setting2`}
-              className={s('', 'setting')}
+              className={s('setting')}
             >
-              <p className={s('', 'setting-label')}>Setting 2</p>
+              <p className={s('setting-label')}>Setting 2</p>
               <input
-                type='text'
-                className={s('', 'setting-input')}
+                type='number'
+                className={s('setting-input')}
                 id={`p${idx + 1}-setting2`}
               />
             </label>
             <label
               htmlFor={`p${idx + 1}-setting3`}
-              className={s('', 'setting')}
+              className={s('setting')}
             >
-              <p className={s('', 'setting-label')}>Setting 3</p>
+              <p className={s('setting-label')}>Label</p>
               <input
                 type='text'
-                className={s('', 'setting-input')}
+                className={s('setting-input')}
                 id={`p${idx + 1}-setting3`}
               />
             </label>

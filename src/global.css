@@ -54,12 +54,16 @@ p > svg {
 
 /* # === Utils === # */
 
+.collapsed {
+  display: none;
+}
+
 .filler {
   flex: 1;
 }
 
-.collapsed {
-  display: none;
+.flow > * + * {
+  margin-block-start: 1em;
 }
 
 .test > * {
@@ -184,6 +188,12 @@ p > svg {
   display: flex;
   justify-content: center;
   margin-block: 2em 1em;
+}
+
+/* -- Headings -- */
+
+.heading {
+  margin-block-end: 1em;
 }
 
 /* -- Links -- */

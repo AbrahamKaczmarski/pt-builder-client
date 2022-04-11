@@ -16,7 +16,7 @@ const data = [
     name: 'Riolu',
     level: 17,
     image:
-      'https://archives.bulbagarden.net/media/upload/thumb/a/a2/447Riolu.png/600px-447Riolu.png'
+      'https://assets.pokemon.com/assets/cms2/img/pokedex/full/447.png'
   }
 ]
 
@@ -25,11 +25,11 @@ const Home = () => {
   const { t } = useTranslation(null, { keyPrefix: 'Home' })
 
   return (
-    <main className='card main'>
-      <h2>{t('HeadingTeamBuilder')}</h2>
+    <main className='card main flow'>
+      <h2 className='heading'>{t('HeadingTeamBuilder')}</h2>
       <section className='enemy-team'>
-        <h3>{t('HeadingEnemyTeam')}</h3>
-        <div className={s('', 'cards')}>
+        <h3 className='heading'>{t('HeadingEnemyTeam')}</h3>
+        <div className={s('cards')}>
           {data.map((item, key) => (
             <PokemonCard pokemon={item} idx={key} key={key} />
           ))}
@@ -37,18 +37,18 @@ const Home = () => {
         </div>
       </section>
       <section className='options'>
-        <h3>{t('HeadingOptions')}</h3>
-        <form className={s('', 'form')}>
-          <label htmlFor='option-1' className={s('', 'form-item input')}>
-            <p className={s('', 'input-label')}>{t('InputOption1')}</p>
-            <input type='text' className={s('', 'input-field')} />
+        <h3 className='heading'>{t('HeadingOptions')}</h3>
+        <form className={s('form')}>
+          <label htmlFor='option-1' className={s('form-item input')}>
+            <p className={s('input-label')}>{t('InputOption1')}</p>
+            <input type='text' className={s('input-field')} />
           </label>
-          <label htmlFor='option-2' className={s('', 'form-item input')}>
-            <p className={s('', 'input-label')}>{t('InputOption1')}</p>
-            <input type='number' className={s('', 'input-field')} />
+          <label htmlFor='option-2' className={s('form-item input')}>
+            <p className={s('input-label')}>{t('InputOption1')}</p>
+            <input type='number' className={s('input-field')} />
           </label>
-          <label htmlFor='option-3' className={s('', 'form-item input')}>
-            <p className={s('', 'input-label')}>{t('InputOption1')}</p>
+          <label htmlFor='option-3' className={s('form-item input')}>
+            <p className={s('input-label')}>{t('InputOption1')}</p>
             <select>
               <option value='A'>Option A</option>
               <option value='B'>Option B</option>

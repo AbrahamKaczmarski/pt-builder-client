@@ -1,8 +1,42 @@
+.setting {
+    padding-block: 0.25em;
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.setting:focus-within {
+    --setting-fg: var(--c-primary-500);
+}
+
+.setting-label {
+    width: max-content;
+    color: var(--setting-fg);
+}
+
+.setting-input {
+    padding-inline: 1em 0.5em;
+    color: var(--setting-fg, var(--c-neutral-700));
+    font-family: Mitr;
+    text-align: center;
+    border: none;
+    outline: none;
+}
+
+.setting-input::selection {
+    background-color: var(--c-secondary-500);
+    color: var(--c-white);
+}
+
+/* # === Home === # */
+
 .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1em;
 }
+
+/* # === PokemonCard === # */
 
 .pokemon-card {
     color: var(--c-white);
@@ -32,4 +66,17 @@
     width: 75%;
     height: 75%;
     object-fit: contain;
+}
+
+.pokemon-settings {
+    margin-block-start: 1em;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-close {
+    height: 0.75em;
 }

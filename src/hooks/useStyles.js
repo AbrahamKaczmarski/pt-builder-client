@@ -1,5 +1,5 @@
 export default function useStyles(styles) {
-  return (global, local) => {
+  return (local, global) => {
     const module = local
       ?.split(/\s+/)
       .map(c => styles[c])

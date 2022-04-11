@@ -12,11 +12,10 @@ const AuthNav = ({ login, register }) => {
   const { t } = useTranslation(null, { keyPrefix: 'Auth.AuthLogo' })
 
   return (
-    <section className={s('', 'logo')}>
+    <section className={s('logo')}>
       <h1>
         <img src={LogoImg} />
       </h1>
-      {/* <p>{t('TextCommunity')}</p> */}
       <Trans
         t={t}
         i18nKey='TextCommunity'

@@ -30,9 +30,9 @@ const Login = () => {
   }
 
   return (
-    <main className={s('', 'layout login')}>
+    <main className={s('layout login')}>
       <AuthNav register />
-      <section className={s('card', 'form')}>
+      <section className={s('form', 'card')}>
         <div className='card-header'>
           <h2>{t('HeadingSignIn')}</h2>
         </div>
