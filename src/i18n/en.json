@@ -1,29 +1,39 @@
 {
-    "Auth": {
-        "Login": {
-            "ButtonLogin": "Log in",
-            "ErrorRequired": "{{field}} cannot be left empty",
-            "HeadingSignIn": "Sign in",
-            "InputEmail": "Email",
-            "InputPassword": "Password"
-        },
-        "Register": {
-            "ButtonLogin": "Log in",
-            "ButtonRegister": "Register",
-            "ErrorRequired": "{{field}} cannot be left empty",
-            "HeadingRegister": "Create an account",
-            "InputConfirmPassword": "Confirm password",
-            "InputEmail": "Email",
-            "InputPassword": "Password",
-            "InputUsername": "Username"
-        },
-        "AuthLogo": {
-            "TextCommunity": "<0>Sign in</0> or <1>join</1> the community!"
-        }
+  "Auth": {
+    "Login": {
+      "ButtonLogin": "Log in",
+      "ErrorRequired": "{{field}} cannot be left empty",
+      "HeadingSignIn": "Sign in",
+      "InputEmail": "Email",
+      "InputPassword": "Password"
     },
-    "Home": {
-        "HeadingTeamBuilder": "Team Builder",
-        "HeadingEnemyTeam": "Enemy Team",
-        "HeadingOptions": "Options"
+    "Register": {
+      "ButtonLogin": "Log in",
+      "ButtonRegister": "Register",
+      "ErrorRequired": "{{field}} cannot be left empty",
+      "HeadingRegister": "Create an account",
+      "InputConfirmPassword": "Confirm password",
+      "InputEmail": "Email",
+      "InputPassword": "Password",
+      "InputUsername": "Username"
+    },
+    "AuthLogo": {
+      "TextCommunity": "<0>Sign in</0> or <1>join</1> the community!"
     }
+  },
+  "Home": {
+    "HeadingTeamBuilder": "Team Builder",
+    "HeadingEnemyTeam": "Enemy Team",
+    "HeadingOptions": "Options"
+  },
+  "Profile": {
+    "ButtonEdit": "edit",
+    "HeadingAccount": "Account",
+    "HeadingAdministration": "Administration",
+    "HeadingFriends": "Friends",
+    "LinkRuleEditor": "Edit business rules",
+    "TextEmail": "Email",
+    "TextPassword": "Password",
+    "TextUsername": "Username"
+  }
 }

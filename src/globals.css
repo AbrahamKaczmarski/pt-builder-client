@@ -102,6 +102,28 @@ p > svg {
   --btn-fg: var(--c-neutral-700);
 }
 
+.inline-btn {
+  background-color: transparent;
+  color: var(--btn-fg, var(--c-secondary-700));
+  font-family: Mitr;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 1px;
+  text-decoration-skip-ink: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.inline-btn:hover {
+  text-decoration: none;
+}
+
+.inline-btn:active {
+  --btn-fg: var(--c-accent-500);
+  text-decoration: none;
+}
+
 /* -- Cards -- */
 
 .card {
@@ -124,6 +146,10 @@ p > svg {
 
 .card-header {
   margin-block-end: 1em;
+}
+
+.card-header > .heading {
+  font-size: 42px;
 }
 
 /* -- Forms -- */
@@ -201,6 +227,7 @@ p > svg {
 .link {
   text-decoration: underline;
   text-decoration-skip-ink: auto;
+  text-underline-offset: 1px;
   color: var(--c-link, var(--c-secondary-500));
   cursor: pointer;
 }
