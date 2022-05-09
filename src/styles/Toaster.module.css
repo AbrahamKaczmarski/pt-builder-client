@@ -1,0 +1,46 @@
+.toaster {
+    position: fixed;
+    bottom: 2em;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.toast {
+    padding-inline: 1.75em 0.5em;
+    padding-block: 0.25em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    background-color: var(--c-toast-bg, var(--c-neutral-500));
+    color: var(--c-toast-text, var(--c-white));
+    border-radius: 0.25em;
+    border: solid 0.125em var(--c-toast-text);
+}
+
+.toast[data-role='error'] {
+    --c-toast-bg: var(--c-white);
+    --c-toast-text: var(--c-error-500);
+    --c-btn-text: var(--c-error-500);
+    --c-btn-bg-hover: var(--c-error-500);
+    --c-btn-text-hover: var(--c-white);
+}
+
+.toast[data-role='info'] {
+    --c-toast-bg: var(--c-white);
+    --c-toast-text: var(--c-primary-500);
+    --c-btn-text: var(--c-primary-500);
+    --c-btn-bg-hover: var(--c-primary-500);
+    --c-btn-text-hover: var(--c-white);
+}
+
+.toast[data-role='success'] {
+    --c-toast-bg: var(--c-white);
+    --c-toast-text: var(--c-success-700);
+    --c-btn-text: var(--c-success-700);
+    --c-btn-bg-hover: var(--c-success-700);
+    --c-btn-text-hover: var(--c-white);
+}

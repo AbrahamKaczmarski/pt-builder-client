@@ -1,35 +1,40 @@
-import React from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import styles from './App.module.css'
+import React, { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import styles from 'styles/App.module.css'
 
-import { useGlobal, useStyles } from '../../hooks'
-import { LogoInlineImg } from '../../assets/img'
-import { t } from 'i18next'
-import { useTranslation } from 'react-i18next'
+import { useGlobal, useStyles } from 'hooks'
+import { LogoInlineImg } from 'assets/img'
+// import { useTranslation } from 'react-i18next'
 
 import {
+  ArrowBackIcon,
   ExitIcon,
   ListIcon,
   PenIcon,
   PlusIcon,
   UserIcon
-} from '../../assets/icons'
+} from 'assets/icons'
 
 const exclusions = ['/login', '/register']
 
 const Header = () => {
   const { pathname } = useLocation()
-  const s = useStyles(styles)
-  const { t } = useTranslation(null, { keyPrefix: 'App.Header' })
-
   const { user, signOut } = useGlobal()
+
+  const s = useStyles(styles)
+  // const { t } = useTranslation(null, { keyPrefix: 'App.Header' })
+
+  const [invitations, setInvitations] = useState(2)
 
   if (exclusions.includes(pathname)) {
     return (
       <header className={s('header clean')}>
         <p>
-          <Link to='/' className='link'>
-            Home
+          <Link to='/' className={s('link-home', 'link')}>
+            <span className='icon'>
+              <ArrowBackIcon />
+            </span>
+            <span>Home</span>
           </Link>
         </p>
       </header>
@@ -53,7 +58,7 @@ const Header = () => {
             </div>
           </Link>
         )}
-        {pathname !== '/teams' && (
+        {!pathname.match(/^\/teams/) && (
           <Link to='/teams'>
             <div className={s('nav-link')}>
               <ListIcon />
@@ -62,11 +67,16 @@ const Header = () => {
         )}
         {user ? (
           <>
-            <Link to='/profile'>
-              <div className={s('nav-link')}>
-                <UserIcon />
-              </div>
-            </Link>
+            {pathname !== '/profile' && (
+              <Link to='/profile'>
+                <div className={s('nav-link')}>
+                  <UserIcon />
+                  {invitations > 0 && (
+                    <div className={s('nav-link-indicator')}>{invitations}</div>
+                  )}
+                </div>
+              </Link>
+            )}
             <div className={s('nav-link')} onClick={signOut}>
               <ExitIcon />
             </div>

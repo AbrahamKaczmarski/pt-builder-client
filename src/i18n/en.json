@@ -2,7 +2,11 @@
   "Auth": {
     "Login": {
       "ButtonLogin": "Log in",
+      "ErrorConnection": "Server is not responding",
+      "ErrorCredentials": "Incorrect email or password",
       "ErrorRequired": "{{field}} cannot be left empty",
+      "ErrorServer": "Server error",
+      "ErrorUnknown": "Something went wrong",
       "HeadingSignIn": "Sign in",
       "InputEmail": "Email",
       "InputPassword": "Password"
@@ -21,19 +25,34 @@
       "TextCommunity": "<0>Sign in</0> or <1>join</1> the community!"
     }
   },
-  "Home": {
+  "TeamBuilder": {
     "HeadingTeamBuilder": "Team Builder",
     "HeadingEnemyTeam": "Enemy Team",
-    "HeadingOptions": "Options"
+    "HeadingOptions": "Options",
+    "ButtonGenerate": "Generate",
+    "TeamList": {
+      "HeadingTeamList": "Your Teams",
+      "HeadingUserTeamList": "{{ user }}'s Teams",
+      "InputSearch": "Filter teams",
+      "ThName": "Name",
+      "ThCreated": "Created",
+      "ThTeam": "Team",
+      "ThEnemies": "Enemies",
+      "ThActions": "Actions"
+    }
   },
   "Profile": {
     "ButtonEdit": "edit",
+    "ButtonInvitations": "Show invitations ({{ amount }})",
+    "ButtonInvite": "Add friend",
     "HeadingAccount": "Account",
     "HeadingAdministration": "Administration",
     "HeadingFriends": "Friends",
+    "InputSearch": "Search for users",
     "LinkRuleEditor": "Edit business rules",
     "TextEmail": "Email",
     "TextPassword": "Password",
-    "TextUsername": "Username"
+    "TextUsername": "Username",
+    "HeadingInvitations": "Invitations"
   }
 }

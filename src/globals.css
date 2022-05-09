@@ -41,6 +41,10 @@ main {
   flex: 1;
 }
 
+svg {
+  height: 100%;
+}
+
 p > svg {
   height: 1em;
 }
@@ -66,10 +70,6 @@ p > svg {
   margin-block-start: 1em;
 }
 
-.test > * {
-  box-shadow: 0 0 1em 2px red;
-}
-
 .wrapper {
   display: contents;
 }
@@ -89,17 +89,61 @@ p > svg {
   cursor: pointer;
 }
 
-.btn.primary {
+.btn:disabled {
+  --btn-bg: var(--c-neutral-300);
+  --btn-fg: var(--c-neutral-500);
+  cursor: default;
+}
+
+.btn:not(:disabled).primary {
   --btn-bg: var(--c-primary-500);
 }
 
-.btn.primary:hover {
+.btn:not(:disabled).primary:hover {
   --btn-bg: var(--c-primary-700);
 }
 
-.btn.primary:active {
+.btn:not(:disabled).primary:active {
   --btn-bg: var(--c-accent-500);
   --btn-fg: var(--c-neutral-700);
+}
+
+.icon-btn {
+  --p: 0.5em;
+  height: calc(2em + 2 * var(--p));
+  aspect-ratio: 1;
+  padding: var(--p);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--c-btn-bg, transparent);
+  color: var(--c-btn-text, var(--c-primary-500));
+  border: none;
+  border-radius: 100%;
+  outline: var(--btn-outline, none);
+  cursor: pointer;
+}
+
+.icon-btn.xs {
+  --p: 0;
+}
+
+.icon-btn.sm {
+  --p: 0.25em;
+}
+
+.icon-btn.lg {
+  --p: 1em;
+}
+
+.icon-btn.xl {
+  --p: 2em;
+}
+
+.icon-btn:hover {
+  background-color: var(--c-btn-bg-hover, var(--c-neutral-100));
+  color: var(--c-btn-text-hover, var(--c-btn-text));
+  outline: var(--btn-outline-hover, none);
 }
 
 .inline-btn {
@@ -182,6 +226,7 @@ p > svg {
 .input-field {
   order: 2;
   padding-block: 0.5em;
+  background-color: transparent;
   color: var(--c-neutral-700);
   font-family: Mitr;
   border: none;
@@ -222,6 +267,13 @@ p > svg {
   margin-block-end: 1em;
 }
 
+/* -- Icons -- */
+
+.icon {
+  display: inline-block;
+  height: 1em;
+}
+
 /* -- Links -- */
 
 .link {
@@ -239,4 +291,38 @@ p > svg {
 
 .link:active {
   color: var(--c-link-active, var(--c-accent-500));
+}
+
+/* -- Headings -- */
+
+.modal-overlay {
+  position: fixed;
+  margin: 0;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgb(0, 0, 0, 0.6);
+}
+
+.modal {
+  background-color: var(--c-neutral-50);
+  border-radius: 1em;
+  padding: 2em;
+  min-width: 480px;
+  min-height: 640px;
+}
+
+.modal > .heading {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+/* -- Tables -- */
+
+.table-header {
+  display: flex;
+}
+
+.col {
+  flex-basis: 100%;
 }

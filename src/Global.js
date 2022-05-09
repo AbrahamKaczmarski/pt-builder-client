@@ -1,16 +1,25 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useRef, useState } from 'react'
+import { login } from './services'
 
 export const GlobalContext = createContext()
 
 const Global = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
+  const tokenRef = useRef(null)
 
   const signIn = (email, password) => {
-    return new Promise(res => {
-      setUser({ name: 'Test User', email })
+    return login({ email, password }).then(({ data }) => {
+      const { _id, email, friends, roles, username } = data.user
+      setUser({
+        email,
+        friends,
+        id: _id,
+        name: username,
+        roles
+      })
+      tokenRef.current = data.token
       setAuthenticated(true)
-      res()
     })
   }
 

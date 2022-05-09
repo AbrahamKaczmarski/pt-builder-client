@@ -1,11 +1,12 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useStyles } from '../../hooks'
+import { useStyles } from 'hooks'
 
 import AuthNav from './AuthNav'
 
-import styles from './Auth.module.css'
+import styles from 'styles/Auth.module.css'
 import { useForm } from 'react-hook-form'
+import { registerUser } from 'services'
 
 const Register = () => {
   const s = useStyles(styles)
@@ -26,8 +27,15 @@ const Register = () => {
   })
 
   // -- Register action
-  const onSubmit = data => {
-    console.log('registering')
+  const onSubmit = async data => {
+    delete data.confirmPassword
+    data.roles = ['user']
+    try {
+      const res = await registerUser(data)
+      console.log(res)
+    } catch (err) {
+      console.dir(err)
+    }
   }
 
   return (
@@ -41,8 +49,7 @@ const Register = () => {
           <form className='form' onSubmit={handleSubmit(onSubmit)}>
             <label
               htmlFor='username'
-              className={`form-item input ${errors.username && 'invalid'}`}
-            >
+              className={`form-item input ${errors.username && 'invalid'}`}>
               <input
                 type='text'
                 className='input-field'
@@ -57,8 +64,7 @@ const Register = () => {
             </label>
             <label
               htmlFor='email'
-              className={`form-item input ${errors.email && 'invalid'}`}
-            >
+              className={`form-item input ${errors.email && 'invalid'}`}>
               <input
                 type='text'
                 className='input-field'
@@ -73,8 +79,7 @@ const Register = () => {
             </label>
             <label
               htmlFor='password'
-              className={`form-item input ${errors.password && 'invalid'}`}
-            >
+              className={`form-item input ${errors.password && 'invalid'}`}>
               <input
                 type='password'
                 className='input-field'
@@ -91,8 +96,7 @@ const Register = () => {
               htmlFor='confirm-password'
               className={`form-item input ${
                 errors.confirmPassword && 'invalid'
-              }`}
-            >
+              }`}>
               <input
                 type='password'
                 className='input-field'

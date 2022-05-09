@@ -17,6 +17,12 @@
   height: 2em;
 }
 
+.link-home {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
 /* -- Nav -- */
 
 .nav {
@@ -29,10 +35,11 @@
 }
 
 .nav-link {
-  display: grid;
-  place-items: center;
+  position: relative;
   block-size: 4em;
   inline-size: 4em;
+  display: grid;
+  place-items: center;
   background-color: var(--nav-bg);
   color: var(--nav-fg);
   border-radius: 9999px;
@@ -63,4 +70,17 @@
 
 .nav-link svg {
   height: 45%;
+}
+
+.nav-link-indicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1.5rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background-color: var(--c-primary-500);
+  font-size: 0.75em;
+  border-radius: 100%;
 }

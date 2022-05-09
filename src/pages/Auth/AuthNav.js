@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { LogoImg } from '../../assets/img'
 import { useStyles } from '../../hooks'
 
-import styles from './Auth.module.css'
+import styles from 'styles/Auth.module.css'
 
 const AuthNav = ({ login, register }) => {
   const s = useStyles(styles)
