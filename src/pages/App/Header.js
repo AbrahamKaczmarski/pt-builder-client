@@ -24,7 +24,7 @@ const Header = () => {
   const s = useStyles(styles)
   // const { t } = useTranslation(null, { keyPrefix: 'App.Header' })
 
-  const [invitations, setInvitations] = useState(2)
+  const [invitations, setInvitations] = useState(0)
 
   if (exclusions.includes(pathname)) {
     return (

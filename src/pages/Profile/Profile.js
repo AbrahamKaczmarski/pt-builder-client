@@ -42,7 +42,7 @@ const Profile = () => {
   const { t } = useTranslation(null, { keyPrefix: 'Profile' })
 
   const [friends, setFriends] = useState(db)
-  const [invites, setInvites] = useState(waiting)
+  const [invites, setInvites] = useState([])
   const [modal, setModal] = useState(false)
 
   const accept = id => {

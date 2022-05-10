@@ -135,3 +135,104 @@
   --c-btn-text: var(--c-white);
   --c-btn-bg-hover: var(--c-error-500);
 }
+
+/* # === TeamList === # */
+
+.team-list {
+  margin-block-start: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+
+.team-list-row {
+  display: flex;
+}
+
+.col-name {
+  flex: 2;
+}
+
+.col-date {
+  flex: 2;
+}
+
+.col-team {
+  flex: 3;
+}
+
+.col-enemies {
+  flex: 3;
+}
+
+.col-actions {
+  flex: 2;
+}
+
+.portrait {
+  height: 2rem;
+  padding: 0.25em;
+  background-color: var(--c-white);
+  outline: solid 0.125px var(--c-neutral-500);
+  box-shadow: inset 0 0 0.25em var(--c-neutral-500);
+}
+
+.portrait-lg {
+  height: 6rem;
+  padding: 0.5em;
+  background-color: var(--c-white);
+  outline: solid 0.125px var(--c-neutral-500);
+  box-shadow: inset 0 0 0.5em var(--c-neutral-500);
+}
+
+.portrait-xl {
+  height: 6rem;
+  padding: 0.5em;
+  margin: 0.125em;
+  background-color: var(--c-white);
+  outline: solid 0.25em var(--c-secondary-700);
+  box-shadow: inset 0 0 0.5em var(--c-neutral-500);
+}
+
+.action {
+  font-size: 0.5em;
+}
+
+.more-icon {
+  --c-btn-bg: var(--c-neutral-700);
+  --c-btn-text: var(--c-white);
+}
+
+.share-icon {
+  --c-btn-bg: var(--c-secondary-700);
+  --c-btn-text: var(--c-white);
+}
+
+.share-icon.active {
+  --c-btn-bg: transparent;
+  --c-btn-text: var(--c-neutral-700);
+}
+
+.delete-icon {
+  --c-btn-bg: var(--c-error-500);
+  --c-btn-text: var(--c-white);
+}
+
+.cell.col-actions {
+  display: flex;
+  gap: 0.5em;
+}
+
+.cell:is(.col-enemies, .col-team) {
+  display: flex;
+  gap: 0.125em;
+}
+
+/* # === Summary === # */
+
+.heading-picks {
+  font-size: 2rem;
+  margin-block: 0.5em;
+  color: var(--c-primary-500);
+}

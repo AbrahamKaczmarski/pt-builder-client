@@ -4,25 +4,7 @@ import { useStyles } from 'hooks'
 import styles from 'styles/TeamBuilder.module.css'
 
 import { PlusIcon, XMarkIcon } from 'assets/icons'
-
-export const index = {
-  Bulbasaur: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
-  Caterpie: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/010.png',
-  Charmander: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
-  Clefairy: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/035.png',
-  Ekans: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/023.png',
-  Jigglypuff: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/039.png',
-  Nidoran: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/029.png',
-  Oddish: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/043.png',
-  Pidgey: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/016.png',
-  Pikachu: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png',
-  Rattata: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/019.png',
-  Sandshrew: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/027.png',
-  Spearow: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/021.png',
-  Squirtle: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png',
-  Weedle: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/013.png',
-  Zubat: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/041.png'
-}
+import { pokedex } from 'mockup'
 
 const PokemonCard = ({ idx, dispatch, pokemon }) => {
   const s = useStyles(styles)
@@ -35,7 +17,7 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
           onClick={() =>
             dispatch({
               action: 'ADD',
-              payload: { name: Object.keys(index)[0] }
+              payload: { name: Object.keys(pokedex)[0] }
             })
           }>
           <PlusIcon />
@@ -56,7 +38,7 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
               payload: { idx, value: e.target.value }
             })
           }}>
-          {Object.keys(index).map(key => (
+          {Object.keys(pokedex).map(key => (
             <option value={key} key={key}>
               {key}
             </option>
@@ -74,7 +56,7 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
         <div className={s('pokemon-data')}>
           <div>
             <div className={s('pokemon-icon')}>
-              <img src={index[pokemon.name]} alt={pokemon.name} />
+              <img src={pokedex[pokemon.name]} alt={pokemon.name} />
             </div>
           </div>
           {/* <div className={s('pokemon-settings')}>

@@ -1,4 +1,14 @@
 {
+  "Admin": {
+    "RuleEditor": {
+      "ButtonAdd": "Add",
+      "ButtonSave": "Save changes",
+      "HeadingRuleEditor": "Edit rules",
+      "HeadingRulesStrong": "Strong picks",
+      "HeadingRulesWeak": "Weak picks",
+      "SuccessChangesSaved": "Rule parameters changed succesfully"
+    }
+  },
   "Auth": {
     "Login": {
       "ButtonLogin": "Log in",
@@ -26,10 +36,14 @@
     }
   },
   "TeamBuilder": {
+    "ButtonGenerate": "Generate",
     "HeadingTeamBuilder": "Team Builder",
     "HeadingEnemyTeam": "Enemy Team",
     "HeadingOptions": "Options",
-    "ButtonGenerate": "Generate",
+    "Summary": {
+      "HeadingPicks": "Selected Pokémon",
+      "TextIntroduction": "designed to defeat following Pokémon:"
+    },
     "TeamList": {
       "HeadingTeamList": "Your Teams",
       "HeadingUserTeamList": "{{ user }}'s Teams",

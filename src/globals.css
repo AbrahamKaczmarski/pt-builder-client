@@ -79,14 +79,19 @@ p > svg {
 /* -- Buttons -- */
 
 .btn {
-  padding-block: 0.75em;
-  padding-inline: 3em;
+  padding-block: var(--btn-pb, 0.75em);
+  padding-inline: var(--btn-pi, 3em);
   background-color: var(--btn-bg, var(--c-neutral-500));
   color: var(--btn-fg, var(--c-white));
   font-family: Mitr;
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+.btn.sm {
+  --btn-pb: 0.25em;
+  --btn-pi: 1em;
 }
 
 .btn:disabled {
@@ -108,6 +113,19 @@ p > svg {
   --btn-fg: var(--c-neutral-700);
 }
 
+.btn:not(:disabled).secondary {
+  --btn-bg: var(--c-secondary-700);
+}
+
+.btn:not(:disabled).secondary:hover {
+  --btn-bg: var(--c-secondary-500);
+}
+
+.btn:not(:disabled).secondary:active {
+  --btn-bg: var(--c-accent-500);
+  --btn-fg: var(--c-neutral-700);
+}
+
 .icon-btn {
   --p: 0.5em;
   height: calc(2em + 2 * var(--p));
@@ -124,6 +142,12 @@ p > svg {
   cursor: pointer;
 }
 
+.icon-btn:hover {
+  background-color: var(--c-btn-bg-hover, var(--c-neutral-100));
+  color: var(--c-btn-text-hover, var(--c-btn-text));
+  outline: var(--btn-outline-hover, none);
+}
+
 .icon-btn.xs {
   --p: 0;
 }
@@ -132,18 +156,16 @@ p > svg {
   --p: 0.25em;
 }
 
+.icon-btn.md {
+  --p: 0.5em;
+}
+
 .icon-btn.lg {
   --p: 1em;
 }
 
 .icon-btn.xl {
   --p: 2em;
-}
-
-.icon-btn:hover {
-  background-color: var(--c-btn-bg-hover, var(--c-neutral-100));
-  color: var(--c-btn-text-hover, var(--c-btn-text));
-  outline: var(--btn-outline-hover, none);
 }
 
 .inline-btn {
@@ -293,7 +315,13 @@ p > svg {
   color: var(--c-link-active, var(--c-accent-500));
 }
 
-/* -- Headings -- */
+/* -- Lists -- */
+
+ul[class] {
+  list-style-type: none;
+}
+
+/* -- Modals -- */
 
 .modal-overlay {
   position: fixed;

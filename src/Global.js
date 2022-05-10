@@ -1,12 +1,31 @@
-import React, { createContext, useRef, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import { login } from './services'
 
+import { teams } from 'mockup'
+
 export const GlobalContext = createContext()
+
+const setCache = (data, key = 'cache') => {
+  localStorage.setItem(
+    `ptBuilder::${key}`,
+    data instanceof Object ? JSON.stringify(data) : data
+  )
+}
+
+const getCache = (key = 'cache') => {
+  return localStorage.getItem(`ptBuilder::${key}`)
+}
 
 const Global = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const tokenRef = useRef(null)
+
+  const [teams, setTeams] = useState(getCache())
+
+  useEffect(() => {
+    setCache(teams)
+  }, [teams])
 
   const signIn = (email, password) => {
     return login({ email, password }).then(({ data }) => {
