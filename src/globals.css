@@ -336,13 +336,18 @@ ul[class] {
   background-color: var(--c-neutral-50);
   border-radius: 1em;
   padding: 2em;
-  min-width: 480px;
-  min-height: 640px;
+  min-width: var(--modal-mw, 480px);
+  min-height: var(--modal-mh, 640px);
 }
 
 .modal > .heading {
   font-size: 2rem;
   font-weight: 400;
+}
+
+.modal.xs {
+  --modal-mw: 0px;
+  --modal-mh: 0px;
 }
 
 /* -- Tables -- */

@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useStyles } from 'hooks'
+import { useGlobal, useStyles } from 'hooks'
 
 import PokemonCard from './PokemonCard'
 
@@ -13,7 +13,7 @@ const reducer = (state, { action, payload }) => {
       return [...state, payload]
     case 'CHANGE':
       const { idx, value } = payload
-      return state.map((v, i) => (i === idx ? { name: value } : v))
+      return state.map((v, i) => (i === idx ? value : v))
     case 'REMOVE':
       return state.filter((v, i) => i !== payload.idx)
     default:
@@ -26,10 +26,6 @@ const TeamBuilder = () => {
   const { t } = useTranslation(null, { keyPrefix: 'TeamBuilder' })
 
   const [data, dispatch] = useReducer(reducer, [])
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
 
   return (
     <main className='card main flow'>

@@ -1,110 +1,155 @@
 .profile-heading {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .profile-picture {
-    height: 4rem;
-    width: 4rem;
+  height: 4rem;
+  width: 4rem;
 }
 
 .card-body {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2em;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2em;
 }
 
 .card-body .heading {
-    font-size: 33px;
-    font-weight: 400;
+  font-size: 33px;
+  font-weight: 400;
 }
 
 .field-label {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .field-value {
-    margin-inline-end: 0.5rem;
-    color: var(--c-neutral-500);
-    font-size: 26px;
+  margin-inline-end: 0.5rem;
+  color: var(--c-neutral-500);
+  font-size: 26px;
 }
 
 .friend-list {
-    padding-block: 1em;
+  padding-block: 1em;
 }
 
 .friend-row {
-    padding-block: 0.5em;
-    display: flex;
-    align-items: center;
-    gap: 1em;
+  padding-block: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 
 .friend-img {
-    height: 2em;
+  height: 2em;
 }
 
 .friend-name {
-    flex: 1;
+  flex: 1;
 }
 
 .friend-controls {
-    --c-btn-text: var(--c-neutral-700);
-    display: flex;
+  --c-btn-text: var(--c-neutral-700);
+  display: flex;
+}
+
+.no-friends {
+  padding-block: 1em;
 }
 
 .list-icon {
-    --c-btn-text-hover: var(--c-secondary-500);
+  --c-btn-text-hover: var(--c-secondary-500);
 }
 
 .remove-icon {
-    --c-btn-text-hover: var(--c-error-500);
+  --c-btn-text-hover: var(--c-error-500);
 }
 
 .list-icon svg {
-    height: 1.5em;
+  height: 1.5em;
+}
+
+.form-input {
+  min-width: 24em;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  border: none;
+  outline: none;
+  margin-block: 1rem;
+}
+
+.controls {
+  margin-block-start: 1em;
+  display: flex;
+  justify-content: center;
 }
 
 .search-form {
-    display: flex;
-    align-items: flex-end;
-    gap: 1em;
+  display: flex;
+  align-items: flex-end;
+  gap: 1em;
 }
 
 .administration {
-    padding: 1rem;
-    background-color: var(--c-neutral-700);
-    color: var(--c-white);
-    border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--c-neutral-700);
+  color: var(--c-white);
+  border-radius: 0.5rem;
 }
 
 .administration > .heading {
-    font-size: 26px;
-    font-weight: 400;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.add-friends {
+  position: relative;
+}
+
+.add-friends-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding-block-end: 0.125em;
+  font-size: 0.75rem;
+  display: grid;
+  place-content: center;
+  background-color: var(--c-primary-500);
+  border-radius: 9999px;
+  transform: translate(50%, -50%);
 }
 
 .invitation {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    --c-btn-text: var(--c-neutral-500);
-    --c-btn-bg-hover: transform;
-    --btn-outline-hover: solid 2px currentColor;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  --c-btn-text: var(--c-neutral-500);
+  --c-btn-bg-hover: transform;
+  --btn-outline-hover: solid 2px currentColor;
 }
 
 .invitation-name {
-    flex: 1;
+  flex: 1;
 }
 
 .accept {
-    --c-btn-text-hover: var(--c-success-500);
+  --c-btn-text-hover: var(--c-success-500);
 }
 
 .deny {
-    --c-btn-text-hover: var(--c-error-500);
+  --c-btn-text-hover: var(--c-error-500);
 }
 
 .invitation-list {
-    color: var(--c-neutral-700);
+  margin-block: 1em;
+  color: var(--c-neutral-700);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

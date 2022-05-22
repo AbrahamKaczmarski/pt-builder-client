@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import styles from 'styles/App.module.css'
+// import { useTranslation } from 'react-i18next'
 
 import { useGlobal, useStyles } from 'hooks'
+
+import styles from 'styles/App.module.css'
+
 import { LogoInlineImg } from 'assets/img'
-// import { useTranslation } from 'react-i18next'
 
 import {
   ArrowBackIcon,
@@ -19,12 +20,10 @@ const exclusions = ['/login', '/register']
 
 const Header = () => {
   const { pathname } = useLocation()
-  const { user, signOut } = useGlobal()
+  const { user, signOut, invitations } = useGlobal()
 
   const s = useStyles(styles)
   // const { t } = useTranslation(null, { keyPrefix: 'App.Header' })
-
-  const [invitations, setInvitations] = useState(0)
 
   if (exclusions.includes(pathname)) {
     return (
@@ -71,8 +70,10 @@ const Header = () => {
               <Link to='/profile'>
                 <div className={s('nav-link')}>
                   <UserIcon />
-                  {invitations > 0 && (
-                    <div className={s('nav-link-indicator')}>{invitations}</div>
+                  {invitations.received?.length > 0 && (
+                    <div className={s('nav-link-indicator')}>
+                      {invitations.received.length}
+                    </div>
                   )}
                 </div>
               </Link>

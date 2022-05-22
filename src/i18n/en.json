@@ -48,6 +48,7 @@
       "HeadingTeamList": "Your Teams",
       "HeadingUserTeamList": "{{ user }}'s Teams",
       "InputSearch": "Filter teams",
+      "TextNoTeams": "You haven't generated any teams yet",
       "ThName": "Name",
       "ThCreated": "Created",
       "ThTeam": "Team",
@@ -56,17 +57,26 @@
     }
   },
   "Profile": {
+    "ButtonAddFriends": "Add friends",
     "ButtonEdit": "edit",
-    "ButtonInvitations": "Show invitations ({{ amount }})",
-    "ButtonInvite": "Add friend",
+    "ButtonInvite": "Invite",
+    "ButtonSave": "Save",
+    "HeadingAddFriend": "Find a friend",
+    "HeadingAddFriends": "Add Friends",
     "HeadingAccount": "Account",
     "HeadingAdministration": "Administration",
     "HeadingFriends": "Friends",
+    "HeadingInvitations": "Invitations",
+    "HeadingYourInvitations": "Your requests",
     "InputSearch": "Search for users",
     "LinkRuleEditor": "Edit business rules",
     "TextEmail": "Email",
+    "TextInvitationAccepted": "Invitation accepted",
+    "TextInvitationRejected": "Invitation rejected",
+    "TextInvitationCancelled": "Request cancelled",
+    "TextNoFriends": "You have no friends :-)",
+    "TextNoInvitations": "There are no new invitations",
     "TextPassword": "Password",
-    "TextUsername": "Username",
-    "HeadingInvitations": "Invitations"
+    "TextUsername": "Username"
   }
 }

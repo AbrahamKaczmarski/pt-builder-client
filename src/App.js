@@ -17,8 +17,8 @@ import Toaster from 'components/Toaster/Toaster'
 
 function App() {
   return (
-    <Global>
-      <Toaster>
+    <Toaster>
+      <Global>
         <Router>
           <Header />
           <Routes>
@@ -35,8 +35,8 @@ function App() {
           </Routes>
           <Footer />
         </Router>
-      </Toaster>
-    </Global>
+      </Global>
+    </Toaster>
   )
 }
 

@@ -1,25 +1,28 @@
-import React from 'react'
-import { useStyles } from 'hooks'
+import React, { useEffect, useState } from 'react'
+import { useGlobal, useStyles } from 'hooks'
 
 import styles from 'styles/TeamBuilder.module.css'
 
 import { PlusIcon, XMarkIcon } from 'assets/icons'
-import { pokedex } from 'mockup'
 
 const PokemonCard = ({ idx, dispatch, pokemon }) => {
+  const { pokedex, randomPokemon } = useGlobal()
+
   const s = useStyles(styles)
 
-  if (!pokemon) {
+  if (pokemon == null) {
     return (
       <div className={s('pokemon-card empty', 'card')}>
         <button
           className='icon-btn xl'
-          onClick={() =>
+          onClick={() => {
             dispatch({
               action: 'ADD',
-              payload: { name: Object.keys(pokedex)[0] }
+              payload: randomPokemon()
             })
-          }>
+          }}
+          disabled={pokedex == null}
+        >
           <PlusIcon />
         </button>
       </div>
@@ -35,12 +38,14 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
           onChange={e => {
             dispatch({
               action: 'CHANGE',
-              payload: { idx, value: e.target.value }
+              payload: { idx, value: pokedex[e.target.value] }
             })
-          }}>
-          {Object.keys(pokedex).map(key => (
-            <option value={key} key={key}>
-              {key}
+          }}
+          value={pokemon._id}
+        >
+          {Object.entries(pokedex).map(([id, { name }]) => (
+            <option value={id} key={id}>
+              {name}
             </option>
           ))}
         </select>
@@ -48,7 +53,8 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
           className={s('icon-close', 'icon-btn sm')}
           onClick={() => {
             dispatch({ action: 'REMOVE', payload: { idx } })
-          }}>
+          }}
+        >
           <XMarkIcon />
         </button>
       </header>
@@ -56,7 +62,7 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
         <div className={s('pokemon-data')}>
           <div>
             <div className={s('pokemon-icon')}>
-              <img src={pokedex[pokemon.name]} alt={pokemon.name} />
+              <img src={pokemon.sprites[0]} alt={pokemon.name} />
             </div>
           </div>
           {/* <div className={s('pokemon-settings')}>
