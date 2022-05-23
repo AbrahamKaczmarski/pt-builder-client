@@ -1,11 +1,13 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
-import { useGlobal, useStyles } from 'hooks'
+import { useStyles, useToaster } from 'hooks'
 
 import PokemonCard from './PokemonCard'
 
 import styles from 'styles/TeamBuilder.module.css'
+import { generateTeam } from 'services'
 
 const reducer = (state, { action, payload }) => {
   switch (action) {
@@ -22,14 +24,27 @@ const reducer = (state, { action, payload }) => {
 }
 
 const TeamBuilder = () => {
+  const navigate = useNavigate()
+
+  const { showError, showInfo } = useToaster()
+
   const s = useStyles(styles)
   const { t } = useTranslation(null, { keyPrefix: 'TeamBuilder' })
 
+  const [name, setName] = useState('')
   const [data, dispatch] = useReducer(reducer, [])
 
   return (
     <main className='card main flow'>
       <h2 className='heading'>{t('HeadingTeamBuilder')}</h2>
+      <label>
+        <span>{t('InputTeamName')}</span>
+        <input
+          type='text'
+          value={name}
+          onChange={({ target }) => setName(target.value)}
+        />
+      </label>
       <section className='enemy-team'>
         <h3 className='heading'>{t('HeadingEnemyTeam')}</h3>
         <div className={s('cards')}>
@@ -45,27 +60,29 @@ const TeamBuilder = () => {
         </div>
       </section>
       <section className={s('options')}>
-        <form className={s('form')}>
-          {/* <h3 className='heading'>{t('HeadingOptions')}</h3>
-          <label htmlFor='option-1' className={s('form-item input')}>
-            <p className={s('input-label')}>{t('InputOption1')}</p>
-            <input type='text' className={s('input-field')} />
-          </label>
-          <label htmlFor='option-2' className={s('form-item input')}>
-            <p className={s('input-label')}>{t('InputOption1')}</p>
-            <input type='number' className={s('input-field')} />
-          </label>
-          <label htmlFor='option-3' className={s('form-item input')}>
-            <p className={s('input-label')}>{t('InputOption1')}</p>
-            <select>
-              <option value='A'>Option A</option>
-              <option value='B'>Option B</option>
-              <option value='C'>Option C</option>
-              <option value='D'>Option D</option>
-            </select>
-          </label> */}
-        </form>
-        <button className='btn primary'>{t('ButtonGenerate')}</button>
+        <form className={s('form')}></form>
+        <button
+          className='btn primary'
+          onClick={() => {
+            if (!(data?.length > 0)) {
+              showInfo(t('InfoAmount'))
+              return
+            }
+            const form = {
+              name: name?.length > 0 ? name : 'My Team',
+              enemyPokemons: data.map(pokemon => pokemon._id)
+            }
+            generateTeam(form)
+              .then(({ data }) => {
+                navigate(`/team/${data._id}`)
+              })
+              .catch(err => {
+                showError(err.message)
+              })
+          }}
+        >
+          {t('ButtonGenerate')}
+        </button>
       </section>
     </main>
   )

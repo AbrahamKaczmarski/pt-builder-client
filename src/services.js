@@ -14,7 +14,8 @@ const userUrl = '/user'
 const pokemonUrl = '/pokemon'
 const invitationUrl = '/invitation'
 const ruleUrl = '/rule'
-const teamUrl = '/team'
+const teamUrl = '/summary'
+const engineUrl = '/engine'
 
 // # === Methods === # //
 
@@ -75,12 +76,28 @@ export const getInvitationList = () => {
 
 // -- Teams -- //
 
+export const generateTeam = data => {
+  return server.post(`${engineUrl}/team`, data)
+}
+
+export const deleteTeam = (id) => {
+  return server.delete(`${teamUrl}/${id}`)
+}
+
 export const getTeamList = () => {
-  return server.get(`${teamUrl}/teams`)
+  return server.get(`${teamUrl}/summaries`)
+}
+
+export const getTeam = id => {
+  return server.get(`${teamUrl}/${id}`)
 }
 
 // -- RuleEditor -- //
 
 export const getRuleParams = () => {
   return server.get(`${ruleUrl}/rules`)
+}
+
+export const updateRule = (id, data) => {
+  return server.patch(`${ruleUrl}/${id}`, data)
 }

@@ -31,11 +31,13 @@ const Profile = () => {
   const navigate = useNavigate()
 
   const {
+    initialized,
     authenticated,
     user,
     invitations,
     updateUserData,
-    updateInvitations
+    updateInvitations,
+    updateToken
   } = useGlobal()
   const { showSuccess, showInfo, showError } = useToaster()
 
@@ -93,10 +95,14 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    !authenticated && navigate('/')
-  }, [authenticated])
+    if (!initialized) return
+    if (!authenticated) {
+      navigate('/')
+      return
+    }
+  }, [authenticated, initialized])
 
-  if (!authenticated) {
+  if (!initialized | !authenticated) {
     return <></>
   }
 
@@ -139,7 +145,7 @@ const Profile = () => {
               </button>
             </p>
           </div>
-          <div>
+          {/* <div>
             <p className={s('field-label')}>{t('TextPassword')}</p>
             <p>
               <button
@@ -149,7 +155,7 @@ const Profile = () => {
                 {t('ButtonEdit')}
               </button>
             </p>
-          </div>
+          </div> */}
         </section>
         <section className={s('friends')}>
           <header className={s('row')}>
@@ -159,7 +165,7 @@ const Profile = () => {
               onClick={() => setModal(true)}
             >
               {t('ButtonAddFriends')}
-              {invitations.received.length > 0 && (
+              {invitations?.received?.length > 0 && (
                 <div className={s('add-friends-label')}>
                   {invitations.received.length}
                 </div>
@@ -243,7 +249,7 @@ const Profile = () => {
             {t('ButtonInvite')}
           </button>
         </div>
-        {invitations.sent?.length > 0 && (
+        {invitations?.sent?.length > 0 && (
           <div className={s('invitation-list', 'flow')}>
             <h3>{t('HeadingYourInvitations')}</h3>
             {invitations.sent?.map(({ _id, requestee }) => (
@@ -324,10 +330,12 @@ const Profile = () => {
               updateUser(fieldIds[edit], editValue)
                 .then(({ data }) => {
                   console.log(data)
-                  updateUserData(data)
+                  data.user && updateUserData(data.user)
+                  data.token && updateToken(data.token)
                   setEdit(null)
                 })
                 .catch(err => {
+                  console.log(err)
                   showError(err.message)
                 })
             }}

@@ -6,8 +6,6 @@ import React, {
   useState
 } from 'react'
 
-import { useToaster } from 'hooks'
-
 import { server, getInvitationList, getPokemonList, login } from './services'
 
 export const GlobalContext = createContext()
@@ -33,8 +31,7 @@ const clearCache = (keys = 'cache') => {
 }
 
 const Global = ({ children }) => {
-  const { showInfo } = useToaster()
-
+  const [initialized, setInitialized] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const tokenRef = useRef(null)
@@ -70,7 +67,6 @@ const Global = ({ children }) => {
       setPokedex(
         data.reduce((obj, pokemon) => ({ ...obj, [pokemon._id]: pokemon }), {})
       )
-      showInfo('Pokedex updated')
     })
     return () => {
       mounted = false
@@ -80,6 +76,7 @@ const Global = ({ children }) => {
   // -- try to maintain previous session
   useEffect(() => {
     if (authenticated) return
+    setInitialized(false)
     const user = getCache('user')
     const token = getCache('token')
     if (user && token) {
@@ -88,6 +85,7 @@ const Global = ({ children }) => {
       setAuthenticated(true)
       server.defaults.headers.common['Authorization'] = `Bearer ${token}`
     }
+    setInitialized(true)
   }, [authenticated])
 
   useEffect(() => {
@@ -122,11 +120,16 @@ const Global = ({ children }) => {
   }
 
   const signIn = (email, password) => {
-    return login({ email, password }).then(({ data }) => {
-      updateUserData(data.user)
-      updateToken(data.token)
-      setAuthenticated(true)
-    })
+    setInitialized(false)
+    return login({ email, password })
+      .then(({ data }) => {
+        updateUserData(data.user)
+        updateToken(data.token)
+        setAuthenticated(true)
+      })
+      .finally(() => {
+        setInitialized(true)
+      })
   }
 
   const signOut = () => {
@@ -134,12 +137,14 @@ const Global = ({ children }) => {
     setToken(null)
     clearCache(['user', 'token'])
     setAuthenticated(false)
+    setInitialized(false)
     delete server.defaults.headers.common['Authorization']
   }
 
   return (
     <GlobalContext.Provider
       value={{
+        initialized,
         authenticated,
         user,
         signIn,
@@ -148,7 +153,8 @@ const Global = ({ children }) => {
         randomPokemon,
         invitations,
         updateInvitations,
-        updateUserData
+        updateUserData,
+        updateToken
       }}
     >
       {children}

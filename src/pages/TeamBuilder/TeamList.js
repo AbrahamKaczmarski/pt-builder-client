@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-import { useStyles } from 'hooks'
-
-import styles from 'styles/TeamBuilder.module.css'
-import { teams } from 'mockup'
-import TeamListRow from './TeamListRow'
+import { useGlobal, useStyles } from 'hooks'
 import { getTeamList } from 'services'
 
+import TeamListRow from './TeamListRow'
+
+import styles from 'styles/TeamBuilder.module.css'
+
 const TeamList = () => {
+  const navigate = useNavigate()
   const { user } = useParams()
+  const { authenticated, initialized } = useGlobal()
 
   const s = useStyles(styles)
   const { t } = useTranslation(null, { keyPrefix: 'TeamBuilder.TeamList' })
 
   const [filter, setFilter] = useState('')
-  const [teamList, setTeamList] = useState([])
+  const [teams, setTeams] = useState([])
 
   const searchFilter = team => {
     const tmpl = new RegExp(filter.split('').join('.*'), 'i')
@@ -25,19 +26,25 @@ const TeamList = () => {
   }
 
   useEffect(() => {
+    if (!initialized) return
+    if (!authenticated) {
+      console.log('navigating')
+      navigate('/')
+      return
+    }
     let mounted = true
     getTeamList().then(({ data }) => {
       if (!mounted) return
-      setTeamList(data)
+      setTeams(data)
     })
     return () => {
       mounted = false
     }
-  }, [])
+  }, [authenticated, initialized])
 
-  useEffect(() => {
-    console.log(teamList)
-  }, [teamList])
+  if (!initialized | !authenticated) {
+    return <></>
+  }
 
   return (
     <main className='card main flow'>
@@ -59,7 +66,7 @@ const TeamList = () => {
           <p className='input-label'>{t('InputSearch')}</p>
         </label>
       </section>
-      {teamList?.length === 0 ? (
+      {teams?.length === 0 ? (
         <p>{t('TextNoTeams')}</p>
       ) : (
         <section className='table'>
@@ -81,13 +88,16 @@ const TeamList = () => {
             </p>
           </header>
           <ul className={s('team-list', 'table-body')}>
-            {/* TODO: remove filter */}
-            {teamList
-              .filter(user ? e => e.public : () => true)
-              .filter(searchFilter)
-              .map(team => (
-                <TeamListRow team={team} editable={!user} key={team.id} />
-              ))}
+            {teams.filter(searchFilter).map(team => (
+              <TeamListRow
+                team={team}
+                onDelete={() =>
+                  setTeams(prev => prev.filter(t => t._id !== team._id))
+                }
+                editable={!user}
+                key={team._id}
+              />
+            ))}
           </ul>
         </section>
       )}

@@ -43,11 +43,15 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
           }}
           value={pokemon._id}
         >
-          {Object.entries(pokedex).map(([id, { name }]) => (
-            <option value={id} key={id}>
-              {name}
-            </option>
-          ))}
+          {Object.entries(pokedex)
+            .sort(([_1, { name: a }], [_2, { name: b }]) =>
+              a > b ? 1 : a < b ? -1 : 0
+            )
+            .map(([id, { name }]) => (
+              <option value={id} key={id}>
+                {name}
+              </option>
+            ))}
         </select>
         <button
           className={s('icon-close', 'icon-btn sm')}

@@ -45,6 +45,10 @@ svg {
   height: 100%;
 }
 
+button svg {
+  pointer-events: none;
+}
+
 p > svg {
   height: 1em;
 }

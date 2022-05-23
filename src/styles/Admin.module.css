@@ -1,5 +1,13 @@
 /* # == RuleEditor == # */
 
+.persistance-controls {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+    display: flex;
+    gap: 1em;
+}
+
 .param + .param {
     padding-block-start: 0.75em;
     border-block-start: solid 1px var(--c-neutral-300);
@@ -11,8 +19,21 @@
 }
 
 .param-key {
+    display: flex;
+    align-items: center;
     margin-inline-end: auto;
     font-weight: 700;
+    cursor: default;
+    --c-btn-text: transparent;
+    --c-btn-text-hover: var(--c-error-500);
+}
+
+.param-key > button {
+    font-size: 0.5rem;
+}
+
+.param-key:hover > button {
+    --c-btn-text: var(--c-neutral-700);
 }
 
 .param-values {
@@ -49,4 +70,8 @@
 .controls {
     display: flex;
     justify-content: center;
+}
+
+.add-param {
+    text-align: center;
 }
