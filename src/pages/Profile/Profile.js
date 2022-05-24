@@ -368,16 +368,16 @@ const Profile = () => {
         </div>
       </Modal>
       <Modal
-        modalClassName='xs'
+        modalClassName={s('image-modal', 'xs')}
         open={imgModal}
         onClose={() => setImgModal(false)}
       >
         <div {...getRootProps()}>
           <input {...getInputProps()} />
           {isDragActive ? (
-            <p>Drop the files here ...</p>
+            <p>{t('TextDropHere')}</p>
           ) : (
-            <p>Drag 'n' drop some files here, or click to select files</p>
+            <p>{t('TextDragOrClick')}</p>
           )}
         </div>
       </Modal>

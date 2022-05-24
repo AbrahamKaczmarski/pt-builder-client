@@ -6,8 +6,6 @@
       "ButtonReset": "Reset rules",
       "ButtonSaveChanges": "Save changes",
       "HeadingRuleEditor": "Edit rules",
-      "HeadingRulesStrong": "Strong picks",
-      "HeadingRulesWeak": "Weak picks",
       "InfoRulesReset": "Your changes have been discarded",
       "SuccessChangesSaved": "Rule parameters changed succesfully"
     }
@@ -83,9 +81,11 @@
     "HeadingFriends": "Friends",
     "HeadingInvitations": "Invitations",
     "HeadingYourInvitations": "Your requests",
-    "InputSearch": "Search for users",
+    "InputSearch": "Filter your friends",
     "LinkRuleEditor": "Edit business rules",
     "TextEmail": "Email",
+    "TextDragOrClick": "Drop an image here or click to search your computer",
+    "TextDropHere": "Drop the image here",
     "TextInvitationAccepted": "Invitation accepted",
     "TextInvitationRejected": "Invitation rejected",
     "TextInvitationCancelled": "Request cancelled",

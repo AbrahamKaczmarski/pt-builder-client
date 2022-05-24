@@ -87,6 +87,11 @@
   margin-block: 1rem;
 }
 
+.image-modal p {
+  min-width: 480px;
+  text-align: center;
+}
+
 .controls {
   margin-block-start: 1em;
   display: flex;

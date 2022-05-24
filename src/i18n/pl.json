@@ -1,0 +1,96 @@
+{
+  "Admin": {
+    "RuleEditor": {
+      "ButtonAdd": "Dodaj",
+      "ButtonAddParam": "Dodaj parametr",
+      "ButtonReset": "Zresetuj",
+      "ButtonSaveChanges": "Zapisz zmiany",
+      "HeadingRuleEditor": "Edytor reguł",
+      "InfoRulesReset": "Zmiany zostały odrzucone",
+      "SuccessChangesSaved": "Zmiany zapisane pomyślnie"
+    }
+  },
+  "Auth": {
+    "Login": {
+      "ButtonLogin": "Zaloguj",
+      "ErrorConnection": "Serwer nie odpowiada",
+      "ErrorCredentials": "Nieprawidłowy email lub hasło",
+      "ErrorRequired": "Pole {{field}} nie może zostać puste",
+      "ErrorServer": "Błąd serwera",
+      "ErrorUnknown": "Coś poszło nie tak",
+      "LinkRegister": "Zarejestruj się",
+      "HeadingSignIn": "Zaloguj się",
+      "InputEmail": "Email",
+      "InputPassword": "Hasło"
+    },
+    "Register": {
+      "ButtonRegister": "Dołącz",
+      "ErrorRequired": "Pole {{field}} nie może zostać puste",
+      "HeadingRegister": "Stwórz konto",
+      "LinkLogin": "Zaloguj się",
+      "InputConfirmPassword": "Potwierdź hasło",
+      "InputEmail": "Email",
+      "InputPassword": "Hasło",
+      "InputUsername": "Nazwa użytkownika"
+    },
+    "AuthLogo": {
+      "TextCommunity": "<0>Zaloguj się</0> lub <1>dołącz</1> do społeczności!"
+    }
+  },
+  "TeamBuilder": {
+    "ButtonGenerate": "Wygeneruj",
+    "HeadingTeamBuilder": "Kreator drużyny",
+    "HeadingEnemyTeam": "Przeciwnicy",
+    "HeadingOptions": "Opcje",
+    "InfoAmount": "Należy wskazać przynajmniej jednego przeciwnika",
+    "TextLoading": "Ładowanie Pokédexu",
+    "Summary": {
+      "HeadingAlternatives": "Alternative choices",
+      "HeadingPicks": "Selected Pokémon",
+      "HeadingSpectrum": "Most Effective Types",
+      "LinkTeamList": "Team list",
+      "SuccessNameUpdate": "Team name updated",
+      "TextDefeats": "DEFEATS",
+      "TextLoading": "Loading Summary"
+    },
+    "TeamList": {
+      "HeadingTeamList": "Twoje drużyny",
+      "HeadingUserTeamList": "Drużyny użytkownika {{ user }}",
+      "InputSearch": "Szukaj drużyny",
+      "TextLoading": "Ładowanie drużyn",
+      "TextLoadingPokedex": "Ładowanie Pokédexu",
+      "TextNoTeams": "Nie wygenerowałeś jeszcze żadnej drużyny",
+      "TextUserLoading": "Sprawdzanie drużyn znajomego"
+    },
+    "TeamListRow": {
+      "HeadingTeam": "Wybrane Pokémony",
+      "HeadingEnemies": "Przeciwnicy",
+      "InfoTeamDeleted": "Usunięto drużynę"
+    }
+  },
+  "Profile": {
+    "ButtonAddFriends": "Dodaj znajomych",
+    "ButtonEdit": "edytuj",
+    "ButtonInvite": "Zaproś",
+    "ButtonSave": "Zapisz",
+    "HeadingAddFriend": "Dodaj znajomego",
+    "HeadingAddFriends": "Dodaj znajomych",
+    "HeadingAccount": "Profil",
+    "HeadingAdministration": "Administracja",
+    "HeadingFriends": "Znajomi",
+    "HeadingInvitations": "Zaproszenia",
+    "HeadingYourInvitations": "Twoje zaproszenia",
+    "InputSearch": "Przeszukaj listę znajomych",
+    "LinkRuleEditor": "Edit business rules",
+    "TextEmail": "Adres email",
+    "TextDragOrClick": "Przeciągnij tu obrazek lub kliknij by otworzyć okno dialogowe",
+    "TextDropHere": "Upuść tu obrazek",
+    "TextInvitationAccepted": "Zaproszenie przyjęte",
+    "TextInvitationRejected": "Zaproszenie odrzucone",
+    "TextInvitationCancelled": "Zaproszenie anulowane",
+    "TextNoFriends": "Nie masz jeszcze żadnych znajomych",
+    "TextNoInvitations": "Nie masz żadnych zaproszeń",
+    "TextPassword": "Hasło",
+    "TextUsername": "Nazwa użytkownika"
+  }
+}

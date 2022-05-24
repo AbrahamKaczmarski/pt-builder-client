@@ -102,3 +102,43 @@
     width: 100%;
   }
 }
+
+/* # === Footer === # */
+
+.footer {
+  display: flex;
+  padding-block: 0.5rem;
+  color: var(--c-secondary-700);
+}
+
+.authors {
+  margin-inline: auto;
+  display: flex;
+  gap: 1.5em;
+}
+
+.language {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  display: flex;
+  gap: 0.5em;
+}
+
+.lng-btn {
+  padding-block: 0.5em;
+  padding-inline: 0.75em;
+  background-color: transparent;
+  color: var(--c-secondary-700);
+  font-family: Mitr;
+  border: none;
+  outline: solid 2px var(--c-secondary-700);
+  outline-offset: -2px;
+  cursor: pointer;
+}
+
+.lng-btn[data-status='active'] {
+  background-color: var(--c-secondary-700);
+  color: var(--c-white);
+  font-weight: 700;
+}
