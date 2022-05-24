@@ -45,13 +45,12 @@
     "InfoAmount": "Należy wskazać przynajmniej jednego przeciwnika",
     "TextLoading": "Ładowanie Pokédexu",
     "Summary": {
-      "HeadingAlternatives": "Alternative choices",
-      "HeadingPicks": "Selected Pokémon",
-      "HeadingSpectrum": "Most Effective Types",
-      "LinkTeamList": "Team list",
-      "SuccessNameUpdate": "Team name updated",
-      "TextDefeats": "DEFEATS",
-      "TextLoading": "Loading Summary"
+      "HeadingAlternatives": "Wybory alternatywne",
+      "HeadingSpectrum": "Najskuteczniejsze Typy",
+      "LinkTeamList": "Lista drużyn",
+      "SuccessNameUpdate": "Nazwa drużyny zaktualizowana",
+      "TextDefeats": "POKONA",
+      "TextLoading": "Wczytywanie podsumowania"
     },
     "TeamList": {
       "HeadingTeamList": "Twoje drużyny",
