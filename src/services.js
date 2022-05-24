@@ -56,6 +56,17 @@ export const updateUser = (key, value) => {
   }
 }
 
+export const setAvatar = ([img]) => {
+  const form = new FormData()
+  form.append('file', img)
+  return server.post(`${userUrl}/avatar`, form, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'boundary': form.boundary
+    }
+  })
+}
+
 // -- Invitations -- //
 
 export const invitationAccept = id => {

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDropzone } from 'react-dropzone'
 import { useTranslation } from 'react-i18next'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useGlobal, useStyles } from 'hooks'
 
@@ -15,11 +15,9 @@ import {
   invitationCancel,
   invitationReject,
   inviteFriend,
+  setAvatar,
   updateUser
 } from 'services'
-
-const pokeballUrl =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/800px-Pokebola-pokeball-png-0.png'
 
 const avatarUrl = 'http://localhost:5000/user/avatar'
 
@@ -46,11 +44,32 @@ const Profile = () => {
   const { t } = useTranslation(null, { keyPrefix: 'Profile' })
 
   const [modal, setModal] = useState(false)
+  const [imgModal, setImgModal] = useState(false)
 
   const [newFriend, setNewFriend] = useState('')
   const [edit, setEdit] = useState(null)
   const [editValue, setEditValue] = useState('')
   const [filter, setFilter] = useState('')
+
+  const onDrop = useCallback(files => {
+    setAvatar(files)
+      .then(() => {
+        setImgModal(false)
+        showSuccess(t('SuccessSetAvatar'))
+      })
+      .catch(err => {
+        showError(err.message)
+      })
+  }, [])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    maxFiles: 1,
+    accept: {
+      'image/jpeg': [],
+      'image/png': []
+    }
+  })
 
   const searchFilter = friend => {
     const tmpl = new RegExp(filter.split('').join('.*'), 'i')
@@ -114,6 +133,9 @@ const Profile = () => {
           <img
             className={s('profile-picture')}
             src={`${avatarUrl}/${user.id}`}
+            onClick={() => {
+              setImgModal(true)
+            }}
             alt='Profile picture'
           />
           {user.name}
@@ -193,7 +215,7 @@ const Profile = () => {
             {user.friends.filter(searchFilter).map((friend, idx) => (
               <div className={s('friend-row')} key={idx}>
                 <img
-                  src={pokeballUrl}
+                  src={`${avatarUrl}/${friend._id}`}
                   alt={friend.username}
                   className={s('friend-img')}
                 />
@@ -256,7 +278,7 @@ const Profile = () => {
             {invitations.sent?.map(({ _id, requestee }) => (
               <div className={s('invitation')} key={_id}>
                 <img
-                  src={pokeballUrl}
+                  src={`${avatarUrl}/${requestee._id}`}
                   alt={requestee.username}
                   className={s('friend-img')}
                 />
@@ -281,7 +303,7 @@ const Profile = () => {
             {invitations.received?.map(({ _id, requester }) => (
               <div className={s('invitation')} key={_id}>
                 <img
-                  src={pokeballUrl}
+                  src={`${avatarUrl}/${requester._id}`}
                   alt={requester.username}
                   className={s('friend-img')}
                 />
@@ -343,6 +365,20 @@ const Profile = () => {
           >
             {t('ButtonSave')}
           </button>
+        </div>
+      </Modal>
+      <Modal
+        modalClassName='xs'
+        open={imgModal}
+        onClose={() => setImgModal(false)}
+      >
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <p>Drag 'n' drop some files here, or click to select files</p>
+          )}
         </div>
       </Modal>
     </main>
