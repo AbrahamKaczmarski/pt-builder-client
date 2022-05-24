@@ -142,3 +142,11 @@
   color: var(--c-white);
   font-weight: 700;
 }
+
+@media screen and (max-width: 479px) {
+  .authors {
+    flex-direction: column;
+    text-align: center;
+    gap: 0;
+  }
+}
