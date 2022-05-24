@@ -1,77 +1,96 @@
 /* # == RuleEditor == # */
 
 .persistance-controls {
-    position: fixed;
-    right: 2em;
-    bottom: 2em;
-    display: flex;
-    gap: 1em;
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+  display: flex;
+  gap: 1em;
 }
 
 .param + .param {
-    padding-block-start: 0.75em;
-    border-block-start: solid 1px var(--c-neutral-300);
+  padding-block-start: 0.75em;
+  border-block-start: solid 1px var(--c-neutral-300);
 }
 
 .param-controls {
-    display: flex;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .param-key {
-    display: flex;
-    align-items: center;
-    margin-inline-end: auto;
-    font-weight: 700;
-    cursor: default;
-    --c-btn-text: transparent;
-    --c-btn-text-hover: var(--c-error-500);
-}
-
-.param-key > button {
-    font-size: 0.5rem;
-}
-
-.param-key:hover > button {
-    --c-btn-text: var(--c-neutral-700);
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+  --c-btn-text: var(--c-error-500);
 }
 
 .param-values {
-    display: flex;
-    gap: 0.5em;
+  text-align: center;
 }
 
 .param-value {
-    color: var(--c-secondary-700);
+  font-size: 2rem;
+  color: var(--c-secondary-700);
 }
 
 .label {
-    display: flex;
-    align-items: center;
-    cursor: default;
-}
-
-.label > button {
-    font-size: 0.5rem;
-    --c-btn-text: transparent;
-    --c-btn-text-hover: var(--c-error-500);
-}
-
-.label:hover > button {
-    --c-btn-text: var(--c-neutral-500);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
 }
 
 .input {
-    padding: 0.25em;
-    border: solid 2px white;
-    outline: none;
+  padding: 0.25em;
+  border: solid 2px white;
+  outline: none;
 }
 
 .controls {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .add-param {
-    text-align: center;
+  text-align: center;
+}
+
+@media screen and (min-width: 960px) {
+  .param-controls {
+    flex-direction: row;
+  }
+
+  .param-key {
+    margin-inline-end: auto;
+    cursor: default;
+    --c-btn-text: transparent;
+    --c-btn-text-hover: var(--c-error-500);
+  }
+
+  .param-key > button {
+    font-size: 0.5rem;
+  }
+
+  .param-key:hover > button {
+    --c-btn-text: var(--c-neutral-700);
+  }
+
+  .param-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  .label > button {
+    font-size: 0.5rem;
+    --c-btn-text: transparent;
+    --c-btn-text-hover: var(--c-error-500);
+  }
+
+  .label:hover > button {
+    --c-btn-text: var(--c-neutral-500);
+  }
 }

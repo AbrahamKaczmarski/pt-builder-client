@@ -1,3 +1,4 @@
+import { useToaster } from 'hooks'
 import React, {
   createContext,
   useCallback,
@@ -31,6 +32,8 @@ const clearCache = (keys = 'cache') => {
 }
 
 const Global = ({ children }) => {
+  const { showError } = useToaster()
+
   const [initialized, setInitialized] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
@@ -50,11 +53,19 @@ const Global = ({ children }) => {
 
   const [pokedex, setPokedex] = useState(null)
 
-  const randomPokemon = useCallback(() => {
-    const keys = Object.keys(pokedex)
-    const idx = Math.floor(Math.random() * keys.length)
-    return pokedex[keys[idx]]
-  }, [pokedex])
+  const getPokemon = useCallback(
+    name => {
+      if (name) {
+        return Object.entries(pokedex).find(
+          ([_, pokemon]) => pokemon.name === name
+        )[1]
+      }
+      const keys = Object.keys(pokedex)
+      const idx = Math.floor(Math.random() * keys.length)
+      return pokedex[keys[idx]]
+    },
+    [pokedex]
+  )
 
   const [teams, setTeams] = useState(getCache())
 
@@ -62,12 +73,19 @@ const Global = ({ children }) => {
   useEffect(() => {
     // -- get Pokemon information
     let mounted = true
-    getPokemonList().then(({ data }) => {
-      if (!mounted) return
-      setPokedex(
-        data.reduce((obj, pokemon) => ({ ...obj, [pokemon._id]: pokemon }), {})
-      )
-    })
+    getPokemonList()
+      .then(({ data }) => {
+        if (!mounted) return
+        setPokedex(
+          data.reduce(
+            (obj, pokemon) => ({ ...obj, [pokemon._id]: pokemon }),
+            {}
+          )
+        )
+      })
+      .catch(err => {
+        showError(err.message)
+      })
     return () => {
       mounted = false
     }
@@ -150,7 +168,7 @@ const Global = ({ children }) => {
         signIn,
         signOut,
         pokedex,
-        randomPokemon,
+        getPokemon,
         invitations,
         updateInvitations,
         updateUserData,

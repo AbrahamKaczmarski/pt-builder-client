@@ -80,7 +80,7 @@ export const generateTeam = data => {
   return server.post(`${engineUrl}/team`, data)
 }
 
-export const deleteTeam = (id) => {
+export const deleteTeam = id => {
   return server.delete(`${teamUrl}/${id}`)
 }
 
@@ -88,8 +88,20 @@ export const getTeamList = () => {
   return server.get(`${teamUrl}/summaries`)
 }
 
+export const getTeamListByUser = id => {
+  return server.get(`${teamUrl}/user/${id}`)
+}
+
 export const getTeam = id => {
   return server.get(`${teamUrl}/${id}`)
+}
+
+export const publishTeam = id => {
+  return server.get(`${teamUrl}/public/${id}`)
+}
+
+export const renameTeam = (id, name) => {
+  return server.patch(`${teamUrl}/${id}`, { name })
 }
 
 // -- RuleEditor -- //

@@ -2,7 +2,7 @@ import React, { useReducer, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
-import { useStyles, useToaster } from 'hooks'
+import { useGlobal, useStyles, useToaster } from 'hooks'
 
 import PokemonCard from './PokemonCard'
 
@@ -27,20 +27,28 @@ const TeamBuilder = () => {
   const navigate = useNavigate()
 
   const { showError, showInfo } = useToaster()
+  const { pokedex } = useGlobal()
 
   const s = useStyles(styles)
   const { t } = useTranslation(null, { keyPrefix: 'TeamBuilder' })
 
-  const [name, setName] = useState('')
+  const [name, setName] = useState('Your Team')
   const [data, dispatch] = useReducer(reducer, [])
+
+  if (!pokedex) {
+    return (
+      <main className={s('empty', 'card main flow')}>
+        <p className={s('empty-text')}>{t('TextLoading')}</p>
+      </main>
+    )
+  }
 
   return (
     <main className='card main flow'>
-      <h2 className='heading'>{t('HeadingTeamBuilder')}</h2>
       <label>
-        <span>{t('InputTeamName')}</span>
         <input
           type='text'
+          className={s('team-name')}
           value={name}
           onChange={({ target }) => setName(target.value)}
         />

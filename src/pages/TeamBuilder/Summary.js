@@ -1,73 +1,219 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import { useGlobal, useStyles } from 'hooks'
+import { useGlobal, useStyles, useToaster } from 'hooks'
 
 import styles from 'styles/TeamBuilder.module.css'
 
-import { getTeam } from 'services'
+import { deleteTeam, getTeam, publishTeam, renameTeam } from 'services'
+import {
+  ArrowMoreIcon,
+  CheckmarkIcon,
+  NetworkIcon,
+  XMarkIcon
+} from 'assets/icons'
+
+const buildSpectrum = data => {
+  if (!data) return null
+  const tmp = Object.entries(data).filter(([_, v]) => v > 0)
+  const [_, max] = tmp.reduce((max, [_, v]) => (v > max ? v : max))
+  return tmp.map(([k, v]) => [k, v / max])
+  // .reduce((obj, [k, v]) => ({ ...obj, [k]: v }), {})
+}
+
+const meterState = score => {
+  if (score < 0.2) return 'low'
+  if (score < 0.6) return 'medium'
+  if (score < 0.9) return 'high'
+  return 'max'
+}
 
 const Summary = () => {
   const { id } = useParams()
-  const { initialized, authenticated, pokedex } = useGlobal()
+  const navigate = useNavigate()
+
+  const { showError, showInfo } = useToaster()
+  const { initialized, authenticated, pokedex, getPokemon } = useGlobal()
 
   const s = useStyles(styles)
   const { t } = useTranslation(null, { keyPrefix: 'TeamBuilder.Summary' })
 
-  const [team, setTeam] = useState(null)
+  const [summary, setSummary] = useState(null)
+  const [n, setN] = useState(0)
+  const [name, setName] = useState('')
+
+  const team = summary?.team.pokemons
+  const enemies = summary?.facts
+  const alts = summary?.alternatives
+  const spectrum = buildSpectrum(summary?.spectrum[0])
 
   useEffect(() => {
     if (!initialized) return
     if (!authenticated) return
 
     getTeam(id).then(({ data }) => {
-      console.log(data)
-      setTeam(data)
+      setSummary(data)
+      setName(data.name)
+      setN(Math.max(data.team.pokemons.length, data.facts.length))
     })
-  }, [initialized, authenticated, setTeam])
+  }, [initialized, authenticated, setSummary])
 
   if (!initialized || !authenticated) {
     return <></>
   }
 
-  if (team == null || !pokedex) {
+  if (summary == null || !pokedex) {
     return (
-      <main className='card main flow'>
-        <p>Loading</p>
+      <main className={s('empty', 'card main flow')}>
+        <p className={s('empty-text')}>{t('TextLoading')}</p>
       </main>
     )
   }
 
   return (
     <main className='card main flow'>
-      <header className='flow'>
-        <h2>{team.name}</h2>
-        <p>{t('TextIntroduction')}</p>
-        <p>
-          {team.team.pokemons.map(({ _id: pokemon }, idx) => (
-            <img
-              src={pokedex[pokemon].sprites[0]}
-              alt={pokedex[pokemon].name}
-              className={s('portrait-lg')}
-              key={idx}
-            />
-          ))}
+      <header>
+        <p className='link'>
+          <Link to='/teams'>{t('LinkTeamList')}</Link>
         </p>
+        <div className={s('summary-header')}>
+          <label>
+            <input
+              type='text'
+              className={s('team-name')}
+              value={name}
+              onChange={({ target }) => setName(target.value)}
+            />
+          </label>
+          <div className={s('summary-controls')}>
+            {name !== summary.name && (
+              <button
+                className={s(
+                  `action save-icon ${team.public && 'active'}`,
+                  'icon-btn md'
+                )}
+                onClick={() => {
+                  renameTeam(summary._id, name)
+                    .then(({ data }) => {
+                      setSummary(data)
+                    })
+                    .catch(err => {
+                      showError(err.message)
+                    })
+                }}
+              >
+                <CheckmarkIcon />
+              </button>
+            )}
+            <button
+              className={s(
+                `action share-icon ${summary.public && 'active'}`,
+                'icon-btn md'
+              )}
+              onClick={() => {
+                publishTeam(summary._id)
+                  .then(({ data }) => {
+                    console.log(data)
+                    setSummary(data)
+                  })
+                  .catch(err => {
+                    showError(err.message)
+                  })
+              }}
+            >
+              <NetworkIcon />
+            </button>
+            <button
+              className={s('action delete-icon', 'icon-btn md')}
+              onClick={() => {
+                deleteTeam(summary._id)
+                  .then(() => {
+                    showInfo(t('InfoTeamDeleted'))
+                    navigate('/teams')
+                  })
+                  .catch(err => {
+                    showError(err.message)
+                  })
+              }}
+            >
+              <XMarkIcon />
+            </button>
+          </div>
+        </div>
       </header>
-      <section className={s('results')}>
-        <h3 className={s('heading-picks')}>{t('HeadingPicks')}</h3>
-        <p className={s('team-picks')}>
-          {team.facts.map(({ _id: pokemon }, idx) => (
-            <img
-              src={pokedex[pokemon].sprites[0]}
-              alt={pokedex[pokemon].name}
-              className={s('portrait-xl')}
-              key={idx}
-            />
-          ))}
-        </p>
+      <section>
+        {[...Array(n)].map((_, i) => (
+          <div className={s('decision-row')} key={i}>
+            <div className={s('decision-counter')}>
+              <div>
+                {team[i] ? (
+                  <img
+                    src={pokedex[team[i]._id].sprites[0]}
+                    alt={pokedex[team[i]._id].name}
+                    title={pokedex[team[i]._id].name}
+                    className={s('portrait-lg')}
+                  />
+                ) : (
+                  'nothing?'
+                )}
+              </div>
+              <p className={s('defeats')}>{t('TextDefeats')}</p>
+              <div>
+                {enemies[i] ? (
+                  <img
+                    src={pokedex[enemies[i]._id].sprites[0]}
+                    alt={pokedex[enemies[i]._id].name}
+                    title={pokedex[enemies[i]._id].name}
+                    className={s('portrait-lg')}
+                  />
+                ) : (
+                  'nothing?'
+                )}
+              </div>
+            </div>
+            {alts[i].length > 0 && (
+              <div className={s('alts')}>
+                <h3 className={s('alt-heading')}>{t('HeadingAlternatives')}</h3>
+                <div className={s('alt-list')}>
+                  {alts[i].map((name, idx) => {
+                    const {
+                      sprites: [img]
+                    } = getPokemon(name)
+                    return (
+                      <img
+                        src={img}
+                        alt={name}
+                        title={name}
+                        className={s('portrait-sm')}
+                        key={idx}
+                      />
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
       </section>
+      {spectrum?.length > 0 && (
+        <section className={s('spectrum')}>
+          <h3>{t('HeadingSpectrum')}</h3>
+          <div className={s('spectrum-meters')}>
+            {spectrum.map(([type, score]) => (
+              <div className={s('spectrum-type')} key={type}>
+                <p>{type}</p>
+                <div className={s('meter-frame')}>
+                  <div
+                    className={s(`meter ${meterState(score)}`)}
+                    style={{ '--meter-score': score }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   )
 }

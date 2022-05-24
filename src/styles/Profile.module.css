@@ -10,14 +10,18 @@
 }
 
 .card-body {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 2em;
 }
 
 .card-body .heading {
   font-size: 33px;
   font-weight: 400;
+}
+
+.friends {
+  order: 9999;
 }
 
 .field-label {
@@ -149,7 +153,25 @@
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (min-width: 960px) {
+  .card-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: min-content 1fr;
+    gap: 2em;
+  }
+
+  .friends {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+
+  .administration {
+    height: fit-content;
+  }
 }

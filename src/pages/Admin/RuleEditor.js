@@ -121,26 +121,28 @@ const RuleEditor = () => {
                       <XMarkIcon />
                     </button>
                   </div>
-                  <input type='text' className={s('input')} />
-                  <button
-                    className='btn sm secondary'
-                    onClick={({ target }) => {
-                      const input = target.previousSibling
-                      if (input?.value?.length > 0) {
-                        dispatch({
-                          action: ACTIONS.ADD_VALUE,
-                          payload: {
-                            rule: ruleIdx,
-                            param: type,
-                            value: input.value
-                          }
-                        })
-                        input.value = ''
-                      }
-                    }}
-                  >
-                    {t('ButtonAdd')}
-                  </button>
+                  <div>
+                    <input type='text' className={s('input')} />
+                    <button
+                      className='btn sm secondary'
+                      onClick={({ target }) => {
+                        const input = target.previousSibling
+                        if (input?.value?.length > 0) {
+                          dispatch({
+                            action: ACTIONS.ADD_VALUE,
+                            payload: {
+                              rule: ruleIdx,
+                              param: type,
+                              value: input.value
+                            }
+                          })
+                          input.value = ''
+                        }
+                      }}
+                    >
+                      {t('ButtonAdd')}
+                    </button>
+                  </div>
                 </div>
                 <div className={s('param-values')}>
                   {counters.map((counter, idx) => (

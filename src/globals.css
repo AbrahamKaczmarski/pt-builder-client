@@ -29,12 +29,14 @@ body {
   background-color: var(--c-neutral-50);
   font-family: Mitr;
   color: var(--c-neutral-700);
+  overflow: auto;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-width: 480px;
 }
 
 main {
@@ -51,6 +53,11 @@ button svg {
 
 p > svg {
   height: 1em;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 /* # === Layouts === # */
@@ -206,7 +213,7 @@ p > svg {
 
 .card.main {
   --card-bg: var(--c-neutral-100);
-  --card-shadow: var(var(--c-neutral-300))
+  --card-shadow: var(var(--c-neutral-300));
 }
 
 .card.small {
@@ -357,9 +364,17 @@ ul[class] {
 /* -- Tables -- */
 
 .table-header {
-  display: flex;
+  display: none;
+}
+
+@media screen and (min-width: 960px) {
+  .table-header {
+    display: flex;
+  }
 }
 
 .col {
   flex-basis: 100%;
 }
+
+/* === # Animations # === */

@@ -6,7 +6,7 @@ import styles from 'styles/TeamBuilder.module.css'
 import { PlusIcon, XMarkIcon } from 'assets/icons'
 
 const PokemonCard = ({ idx, dispatch, pokemon }) => {
-  const { pokedex, randomPokemon } = useGlobal()
+  const { pokedex, getPokemon } = useGlobal()
 
   const s = useStyles(styles)
 
@@ -18,7 +18,7 @@ const PokemonCard = ({ idx, dispatch, pokemon }) => {
           onClick={() => {
             dispatch({
               action: 'ADD',
-              payload: randomPokemon()
+              payload: getPokemon()
             })
           }}
           disabled={pokedex == null}

@@ -41,23 +41,29 @@
   "TeamBuilder": {
     "ButtonGenerate": "Generate",
     "HeadingTeamBuilder": "Team Builder",
-    "HeadingEnemyTeam": "Enemy Team",
+    "HeadingEnemyTeam": "Enemies",
     "HeadingOptions": "Options",
     "InfoAmount": "You must choose at least one opponent",
+    "TextLoading": "Loading the Pokédex",
     "Summary": {
+      "HeadingAlternatives": "Alternative choices",
       "HeadingPicks": "Selected Pokémon",
-      "TextIntroduction": "designed to defeat following Pokémon:"
+      "HeadingSpectrum": "Most Effective Types",
+      "LinkTeamList": "Team list",
+      "TextDefeats": "DEFEATS",
+      "TextLoading": "Loading Summary"
     },
     "TeamList": {
       "HeadingTeamList": "Your Teams",
       "HeadingUserTeamList": "{{ user }}'s Teams",
       "InputSearch": "Filter teams",
-      "TextNoTeams": "You haven't generated any teams yet",
-      "ThName": "Name",
-      "ThCreated": "Created",
-      "ThTeam": "Team",
-      "ThEnemies": "Enemies",
-      "ThActions": "Actions"
+      "TextLoading": "Loading your teams",
+      "TextUserLoading": "Checking user's teams",
+      "TextNoTeams": "You haven't generated any teams yet"
+    },
+    "TeamListRow": {
+      "HeadingTeam": "Chosen Pokémon",
+      "HeadingEnemies": "Opponents"
     }
   },
   "Profile": {

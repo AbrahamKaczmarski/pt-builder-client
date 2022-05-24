@@ -11,7 +11,6 @@ import styles from 'styles/Profile.module.css'
 import { CheckmarkIcon, ListIcon, XMarkIcon } from 'assets/icons'
 import useToaster from 'hooks/useToaster'
 import {
-  getFriendList,
   invitationAccept,
   invitationCancel,
   invitationReject,
@@ -21,6 +20,8 @@ import {
 
 const pokeballUrl =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/800px-Pokebola-pokeball-png-0.png'
+
+const avatarUrl = 'http://localhost:5000/user/avatar'
 
 const fieldIds = {
   TextEmail: 'email',
@@ -112,7 +113,7 @@ const Profile = () => {
         <h2 className={s('profile-heading', 'heading')}>
           <img
             className={s('profile-picture')}
-            src={pokeballUrl}
+            src={`${avatarUrl}/${user.id}`}
             alt='Profile picture'
           />
           {user.name}
@@ -189,8 +190,8 @@ const Profile = () => {
             {user.friends.length === 0 && (
               <p className={s('no-friends')}>{t('TextNoFriends')}</p>
             )}
-            {user.friends.filter(searchFilter).map(friend => (
-              <div className={s('friend-row')} key={friend.id}>
+            {user.friends.filter(searchFilter).map((friend, idx) => (
+              <div className={s('friend-row')} key={idx}>
                 <img
                   src={pokeballUrl}
                   alt={friend.username}
@@ -200,7 +201,7 @@ const Profile = () => {
                 <div className={s('friend-controls')}>
                   <button
                     className={s('list-icon', 'icon-btn')}
-                    onClick={() => navigate(`/teams/${friend.username}`)}
+                    onClick={() => navigate(`/teams/${friend._id}`)}
                   >
                     <ListIcon />
                   </button>

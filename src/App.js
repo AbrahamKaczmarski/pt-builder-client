@@ -29,7 +29,7 @@ function App() {
             <Route path='/team' element={<TeamBuilder />} />
             <Route path='/team/:id' element={<Summary />} />
             <Route path='/teams' element={<TeamList />} />
-            <Route path='/teams/:user' element={<TeamList />} />
+            <Route path='/teams/:userId' element={<TeamList />} />
             <Route path='/rule-editor' element={<RuleEditor />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
