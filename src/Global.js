@@ -1,4 +1,3 @@
-import { useToaster } from 'hooks'
 import React, {
   createContext,
   useCallback,
@@ -7,29 +6,11 @@ import React, {
   useState
 } from 'react'
 
-import { server, getInvitationList, getPokemonList, login } from './services'
+import { clearCache, getCache, setCache } from 'cache'
+import { useToaster } from 'hooks'
+import { server, getInvitationList, getPokemonList, login } from 'services'
 
 export const GlobalContext = createContext()
-
-const setCache = (data, key = 'cache') => {
-  localStorage.setItem(
-    `ptBuilder::${key}`,
-    data instanceof Object ? JSON.stringify(data) : data
-  )
-}
-
-const getCache = (key = 'cache') => {
-  return localStorage.getItem(`ptBuilder::${key}`)
-}
-
-const clearCache = (keys = 'cache') => {
-  if (!(keys instanceof Array)) {
-    keys = [keys]
-  }
-  keys.forEach(key => {
-    localStorage.removeItem(`ptBuilder::${key}`)
-  })
-}
 
 const Global = ({ children }) => {
   const { showError } = useToaster()

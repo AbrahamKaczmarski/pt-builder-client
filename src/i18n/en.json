@@ -52,6 +52,7 @@
       "HeadingPicks": "Selected Pokémon",
       "HeadingSpectrum": "Most Effective Types",
       "LinkTeamList": "Team list",
+      "SuccessNameUpdate": "Team name updated",
       "TextDefeats": "DEFEATS",
       "TextLoading": "Loading Summary"
     },
@@ -60,12 +61,14 @@
       "HeadingUserTeamList": "{{ user }}'s Teams",
       "InputSearch": "Filter teams",
       "TextLoading": "Loading your teams",
-      "TextUserLoading": "Checking user's teams",
-      "TextNoTeams": "You haven't generated any teams yet"
+      "TextLoadingPokedex": "Loading the Pokédex",
+      "TextNoTeams": "You haven't generated any teams yet",
+      "TextUserLoading": "Checking user's teams"
     },
     "TeamListRow": {
       "HeadingTeam": "Chosen Pokémon",
-      "HeadingEnemies": "Opponents"
+      "HeadingEnemies": "Opponents",
+      "InfoTeamDeleted": "Team removed"
     }
   },
   "Profile": {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { getCache } from 'cache'
 import { useGlobal, useStyles, useToaster } from 'hooks'
 import { getTeamList, getTeamListByUser } from 'services'
 
@@ -31,7 +32,7 @@ const TeamList = () => {
   useEffect(() => {
     if (!initialized) return
     if (!authenticated) {
-      navigate('/')
+      setTeams(JSON.parse(getCache('localTeams')) ?? [])
       return
     }
     let mounted = true
@@ -54,15 +55,19 @@ const TeamList = () => {
     }
   }, [authenticated, initialized])
 
-  if (!initialized | !authenticated) {
+  if (!initialized) {
     return <></>
   }
 
-  if (loading || !pokedex) {
+  if (loading || (teams.length > 0 && !pokedex)) {
     return (
       <main className={s('empty', 'card main flow')}>
         <p className={s('empty-text')}>
-          {userId ? t('TextUserLoading') : t('TextLoading')}
+          {!pokedex
+            ? t('TextLoadingPokedex')
+            : userId
+            ? t('TextUserLoading')
+            : t('TextLoading')}
         </p>
       </main>
     )
@@ -97,11 +102,13 @@ const TeamList = () => {
       ) : (
         <section>
           <ul className={s('team-list', 'table-body')}>
-            {teams.filter(searchFilter).map(team => (
+            {teams.filter(searchFilter).map((team, idx) => (
               <TeamListRow
                 team={team}
                 onDelete={() =>
-                  setTeams(prev => prev.filter(t => t._id !== team._id))
+                  authenticated
+                    ? setTeams(prev => prev.filter(t => t._id !== team._id))
+                    : setTeams(JSON.parse(getCache('localTeams')))
                 }
                 onPublish={() => {
                   setTeams(prev =>
@@ -111,7 +118,8 @@ const TeamList = () => {
                   )
                 }}
                 editable={!userId}
-                key={team._id}
+                key={team._id ?? idx}
+                index={idx}
               />
             ))}
           </ul>

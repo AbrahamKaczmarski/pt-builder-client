@@ -7,8 +7,9 @@ import styles from 'styles/TeamBuilder.module.css'
 import { ArrowMoreIcon, NetworkIcon, XMarkIcon } from 'assets/icons'
 
 import { deleteTeam, publishTeam } from 'services'
+import { removeLocalTeam } from 'cache'
 
-const TeamListRow = ({ team, editable, onDelete, onPublish }) => {
+const TeamListRow = ({ team, editable, onDelete, onPublish, index }) => {
   const navigate = useNavigate()
   const { pokedex } = useGlobal()
   const { showError, showInfo } = useToaster()
@@ -26,32 +27,45 @@ const TeamListRow = ({ team, editable, onDelete, onPublish }) => {
         <p className={s('team-actions')}>
           <button
             className={s('action more-icon', 'icon-btn md')}
-            onClick={() => navigate(`/team/${team._id}`)}
+            onClick={() =>
+              navigate(
+                team._id != null ? `/team/${team._id}` : `/team/local-${index}`
+              )
+            }
           >
             <ArrowMoreIcon />
           </button>
           {editable && (
             <>
-              <button
-                className={s(
-                  `action share-icon ${team.public && 'active'}`,
-                  'icon-btn md'
-                )}
-                onClick={() => {
-                  publishTeam(team._id)
-                    .then(() => {
-                      onPublish()
-                    })
-                    .catch(err => {
-                      showError(err.message)
-                    })
-                }}
-              >
-                <NetworkIcon />
-              </button>
+              {!!team._id && (
+                <button
+                  className={s(
+                    `action share-icon ${team.public && 'active'}`,
+                    'icon-btn md'
+                  )}
+                  onClick={() => {
+                    publishTeam(team._id)
+                      .then(() => {
+                        onPublish()
+                      })
+                      .catch(err => {
+                        showError(err.message)
+                      })
+                  }}
+                >
+                  <NetworkIcon />
+                </button>
+              )}
               <button
                 className={s('action delete-icon', 'icon-btn md')}
                 onClick={() => {
+                  if (!team._id) {
+                    removeLocalTeam(index)
+                    onDelete()
+                    showInfo(t('InfoTeamDeleted'))
+                    return
+                  }
+
                   deleteTeam(team._id)
                     .then(() => {
                       onDelete()
@@ -72,11 +86,11 @@ const TeamListRow = ({ team, editable, onDelete, onPublish }) => {
         <div>
           <h4>{t('HeadingTeam')}</h4>
           <p className={s('team-picks')}>
-            {team.team.pokemons?.map(({ _id: pokemon }, idx) => (
+            {team.team.pokemons?.map((pokemon, idx) => (
               <img
-                src={pokedex[pokemon].sprites[0]}
-                alt={pokedex[pokemon].name}
-                title={pokedex[pokemon].name}
+                src={pokedex[pokemon?._id ?? pokemon].sprites[0]}
+                alt={pokedex[pokemon?._id ?? pokemon].name}
+                title={pokedex[pokemon?._id ?? pokemon].name}
                 className={s('portrait')}
                 key={idx}
               />
@@ -86,11 +100,11 @@ const TeamListRow = ({ team, editable, onDelete, onPublish }) => {
         <div>
           <h4>{t('HeadingEnemies')}</h4>
           <p className={s('team-enemies')}>
-            {team.facts?.map(({ _id: pokemon }, idx) => (
+            {team.facts?.map((pokemon, idx) => (
               <img
-                src={pokedex[pokemon].sprites[0]}
-                alt={pokedex[pokemon].name}
-                title={pokedex[pokemon].name}
+                src={pokedex[pokemon?._id ?? pokemon].sprites[0]}
+                alt={pokedex[pokemon?._id ?? pokemon].name}
+                title={pokedex[pokemon?._id ?? pokemon].name}
                 className={s('portrait')}
                 key={idx}
               />

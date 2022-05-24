@@ -2,12 +2,13 @@ import React, { useReducer, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
+import { addLocalTeam } from 'cache'
 import { useGlobal, useStyles, useToaster } from 'hooks'
+import { generateTeam } from 'services'
 
 import PokemonCard from './PokemonCard'
 
 import styles from 'styles/TeamBuilder.module.css'
-import { generateTeam } from 'services'
 
 const reducer = (state, { action, payload }) => {
   switch (action) {
@@ -27,7 +28,7 @@ const TeamBuilder = () => {
   const navigate = useNavigate()
 
   const { showError, showInfo } = useToaster()
-  const { pokedex } = useGlobal()
+  const { pokedex, authenticated } = useGlobal()
 
   const s = useStyles(styles)
   const { t } = useTranslation(null, { keyPrefix: 'TeamBuilder' })
@@ -81,7 +82,11 @@ const TeamBuilder = () => {
             }
             generateTeam(form)
               .then(({ data }) => {
-                navigate(`/team/${data._id}`)
+                if (authenticated) {
+                  navigate(`/team/${data._id}`)
+                  return
+                }
+                navigate(`/team/local-${addLocalTeam(data)}`)
               })
               .catch(err => {
                 showError(err.message)

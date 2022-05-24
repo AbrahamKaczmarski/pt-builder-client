@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
+import { getCache, removeLocalTeam, updateLocalTeam } from 'cache'
 import { useGlobal, useStyles, useToaster } from 'hooks'
 
 import styles from 'styles/TeamBuilder.module.css'
@@ -17,9 +18,9 @@ import {
 const buildSpectrum = data => {
   if (!data) return null
   const tmp = Object.entries(data).filter(([_, v]) => v > 0)
+  if (tmp.length === 0) return null
   const [_, max] = tmp.reduce((max, [_, v]) => (v > max ? v : max))
   return tmp.map(([k, v]) => [k, v / max])
-  // .reduce((obj, [k, v]) => ({ ...obj, [k]: v }), {})
 }
 
 const meterState = score => {
@@ -33,7 +34,7 @@ const Summary = () => {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const { showError, showInfo } = useToaster()
+  const { showError, showInfo, showSuccess } = useToaster()
   const { initialized, authenticated, pokedex, getPokemon } = useGlobal()
 
   const s = useStyles(styles)
@@ -42,24 +43,38 @@ const Summary = () => {
   const [summary, setSummary] = useState(null)
   const [n, setN] = useState(0)
   const [name, setName] = useState('')
+  const [localId, setLocalId] = useState(null)
 
   const team = summary?.team.pokemons
   const enemies = summary?.facts
   const alts = summary?.alternatives
-  const spectrum = buildSpectrum(summary?.spectrum[0])
+  const spectrum = buildSpectrum(
+    Array.isArray(summary?.spectrum) ? summary?.spectrum[0] : summary?.spectrum
+  )
 
   useEffect(() => {
     if (!initialized) return
-    if (!authenticated) return
+    if (!authenticated) {
+      const {
+        groups: { index }
+      } = id.match(/local-(?<index>\d+)/i)
+      setLocalId(index)
+      const data = JSON.parse(getCache('localTeams'))[index]
+      console.log(data)
+      setSummary(data)
+      setName(data.name)
+      setN(Math.max(data.team.pokemons.length, data.facts.length))
+      return
+    }
 
     getTeam(id).then(({ data }) => {
       setSummary(data)
       setName(data.name)
       setN(Math.max(data.team.pokemons.length, data.facts.length))
     })
-  }, [initialized, authenticated, setSummary])
+  }, [initialized, authenticated, setSummary, setName, setN, setLocalId])
 
-  if (!initialized || !authenticated) {
+  if (!initialized) {
     return <></>
   }
 
@@ -94,9 +109,18 @@ const Summary = () => {
                   'icon-btn md'
                 )}
                 onClick={() => {
+                  if (localId) {
+                    const data = updateLocalTeam(localId, name)
+                    if (data) {
+                      setSummary(data)
+                      showSuccess(t('SuccessNameUpdate'))
+                    }
+                    return
+                  }
                   renameTeam(summary._id, name)
                     .then(({ data }) => {
                       setSummary(data)
+                      showSuccess(t('SuccessNameUpdate'))
                     })
                     .catch(err => {
                       showError(err.message)
@@ -106,27 +130,36 @@ const Summary = () => {
                 <CheckmarkIcon />
               </button>
             )}
-            <button
-              className={s(
-                `action share-icon ${summary.public && 'active'}`,
-                'icon-btn md'
-              )}
-              onClick={() => {
-                publishTeam(summary._id)
-                  .then(({ data }) => {
-                    console.log(data)
-                    setSummary(data)
-                  })
-                  .catch(err => {
-                    showError(err.message)
-                  })
-              }}
-            >
-              <NetworkIcon />
-            </button>
+            {!localId && (
+              <button
+                className={s(
+                  `action share-icon ${summary.public && 'active'}`,
+                  'icon-btn md'
+                )}
+                onClick={() => {
+                  publishTeam(summary._id)
+                    .then(({ data }) => {
+                      console.log(data)
+                      setSummary(data)
+                    })
+                    .catch(err => {
+                      showError(err.message)
+                    })
+                }}
+              >
+                <NetworkIcon />
+              </button>
+            )}
             <button
               className={s('action delete-icon', 'icon-btn md')}
               onClick={() => {
+                if (localId != null) {
+                  removeLocalTeam(localId)
+                  showInfo(t('InfoTeamDeleted'))
+                  navigate('/teams')
+                  return
+                }
+
                 deleteTeam(summary._id)
                   .then(() => {
                     showInfo(t('InfoTeamDeleted'))
@@ -149,9 +182,9 @@ const Summary = () => {
               <div>
                 {team[i] ? (
                   <img
-                    src={pokedex[team[i]._id].sprites[0]}
-                    alt={pokedex[team[i]._id].name}
-                    title={pokedex[team[i]._id].name}
+                    src={pokedex[team[i]?._id ?? team[i]].sprites[0]}
+                    alt={pokedex[team[i]?._id ?? team[i]].name}
+                    title={pokedex[team[i]?._id ?? team[i]].name}
                     className={s('portrait-lg')}
                   />
                 ) : (
