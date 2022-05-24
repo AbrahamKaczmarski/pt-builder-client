@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useGlobal, useStyles } from '../../hooks'
 
@@ -37,13 +37,13 @@ const Login = () => {
       await signIn(data.email, data.password)
       navigate('/')
     } catch (err) {
-      if(err.message === 'Network Error') {
+      if (err.message === 'Network Error') {
         return showError(t('ErrorConnection'))
       }
-      if(err?.response?.status === 401) {
+      if (err?.response?.status === 401) {
         return showError(t('ErrorCredentials'))
       }
-      if(err?.response?.status === 500) {
+      if (err?.response?.status === 500) {
         return showError(t('ErrorServer'))
       }
       return showError(t('ErrorUnknown'))
@@ -61,7 +61,8 @@ const Login = () => {
           <form className='form' onSubmit={handleSubmit(onSubmit)}>
             <label
               htmlFor='email'
-              className={`form-item input ${errors.email && 'invalid'}`}>
+              className={`form-item input ${errors.email && 'invalid'}`}
+            >
               <input
                 type='text'
                 className='input-field'
@@ -76,7 +77,8 @@ const Login = () => {
             </label>
             <label
               htmlFor='password'
-              className={`form-item input ${errors.password && 'invalid'}`}>
+              className={`form-item input ${errors.password && 'invalid'}`}
+            >
               <input
                 type='password'
                 className='input-field'
@@ -92,6 +94,9 @@ const Login = () => {
             <div className='form-item controls'>
               <button className='btn primary'>{t('ButtonLogin')}</button>
             </div>
+            <p className={s('link-swap', 'link')}>
+              <Link to='/register'>{t('LinkRegister')}</Link>
+            </p>
           </form>
         </div>
       </section>

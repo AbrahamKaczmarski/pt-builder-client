@@ -68,7 +68,6 @@ const TeamBuilder = () => {
         </div>
       </section>
       <section className={s('options')}>
-        <form className={s('form')}></form>
         <button
           className='btn primary'
           onClick={() => {

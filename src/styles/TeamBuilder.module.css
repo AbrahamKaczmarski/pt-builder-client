@@ -31,12 +31,13 @@
 /* # === TeamBuilder === # */
 
 input.team-name {
+  width: 100%;
   padding-block: 0.5em;
   background-color: transparent;
+  color: var(--c-neutral-700);
+  font-size: 1.75rem;
   border: none;
   outline: none;
-  font-size: 1.75rem;
-  color: var(--c-neutral-700);
 }
 
 input.team-name:hover {
@@ -49,8 +50,7 @@ input.team-name:focus {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5em;
+  gap: 1rem;
 }
 
 .search-form {
@@ -78,9 +78,9 @@ input.team-name:focus {
 }
 
 .options {
+  padding-block-start: 2rem;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: center;
 }
 
 /* -- PokemonCard --- */
@@ -152,6 +152,17 @@ input.team-name:focus {
   --c-btn-text: var(--c-white);
   --c-btn-text-hover: var(--c-error-500);
   --c-btn-bg-hover: transparent;
+}
+
+@media screen and (min-width: 960px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5em;
+  }
+
+  .options {
+    justify-content: flex-end;
+  }
 }
 
 /* # === TeamList === # */

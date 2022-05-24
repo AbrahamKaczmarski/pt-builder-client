@@ -1,11 +1,10 @@
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: clamp(480px, calc(80vw - 8rem), 960px);
   margin: 0 auto;
   padding-block: 0.5em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1em;
 }
 
 .header.clean {
@@ -27,6 +26,8 @@
 
 .nav {
   display: flex;
+  justify-content: space-around;
+  width: 100%;
   gap: 0.5em;
 }
 
@@ -83,4 +84,21 @@
   background-color: var(--c-primary-500);
   font-size: 0.75em;
   border-radius: 100%;
+}
+
+@media screen and (min-width: 960px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+  }
+  .nav {
+    width: min-content;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .header {
+    width: 100%;
+  }
 }

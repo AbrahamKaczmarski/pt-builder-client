@@ -9,10 +9,20 @@
 }
 
 .form {
-  width: 25vw;
+  width: clamp(360px, 40vw, 480px);
 }
 
 .logo {
   width: 20vw;
   text-align: center;
+}
+
+.link-swap {
+  text-align: center;
+}
+
+@media screen and (max-width: 959px) {
+  .logo {
+    display: none;
+  }
 }

@@ -7,6 +7,7 @@ import AuthNav from './AuthNav'
 import styles from 'styles/Auth.module.css'
 import { useForm } from 'react-hook-form'
 import { registerUser } from 'services'
+import { Link } from 'react-router-dom'
 
 const Register = () => {
   const s = useStyles(styles)
@@ -49,7 +50,8 @@ const Register = () => {
           <form className='form' onSubmit={handleSubmit(onSubmit)}>
             <label
               htmlFor='username'
-              className={`form-item input ${errors.username && 'invalid'}`}>
+              className={`form-item input ${errors.username && 'invalid'}`}
+            >
               <input
                 type='text'
                 className='input-field'
@@ -64,7 +66,8 @@ const Register = () => {
             </label>
             <label
               htmlFor='email'
-              className={`form-item input ${errors.email && 'invalid'}`}>
+              className={`form-item input ${errors.email && 'invalid'}`}
+            >
               <input
                 type='text'
                 className='input-field'
@@ -79,7 +82,8 @@ const Register = () => {
             </label>
             <label
               htmlFor='password'
-              className={`form-item input ${errors.password && 'invalid'}`}>
+              className={`form-item input ${errors.password && 'invalid'}`}
+            >
               <input
                 type='password'
                 className='input-field'
@@ -96,7 +100,8 @@ const Register = () => {
               htmlFor='confirm-password'
               className={`form-item input ${
                 errors.confirmPassword && 'invalid'
-              }`}>
+              }`}
+            >
               <input
                 type='password'
                 className='input-field'
@@ -112,6 +117,9 @@ const Register = () => {
             <div className='form-item controls'>
               <button className='btn primary'>{t('ButtonRegister')}</button>
             </div>
+            <p className={s('link-swap', 'link')}>
+              <Link to='/login'>{t('LinkLogin')}</Link>
+            </p>
           </form>
         </div>
       </section>

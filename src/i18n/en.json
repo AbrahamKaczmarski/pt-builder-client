@@ -20,6 +20,7 @@
       "ErrorRequired": "{{field}} cannot be left empty",
       "ErrorServer": "Server error",
       "ErrorUnknown": "Something went wrong",
+      "LinkRegister": "Register",
       "HeadingSignIn": "Sign in",
       "InputEmail": "Email",
       "InputPassword": "Password"
@@ -29,6 +30,7 @@
       "ButtonRegister": "Register",
       "ErrorRequired": "{{field}} cannot be left empty",
       "HeadingRegister": "Create an account",
+      "LinkLogin": "Login",
       "InputConfirmPassword": "Confirm password",
       "InputEmail": "Email",
       "InputPassword": "Password",

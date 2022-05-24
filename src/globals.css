@@ -36,7 +36,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-width: 480px;
 }
 
 main {
@@ -65,6 +64,12 @@ a {
 .main {
   width: clamp(480px, calc(80vw - 8rem), 960px);
   margin: 0 auto;
+}
+
+@media screen and (max-width: 479px) {
+  .main {
+    width: 100%;
+  }
 }
 
 /* # === Utils === # */
@@ -209,6 +214,13 @@ a {
   background-color: var(--card-bg, var(--c-white));
   border-radius: 0.5rem;
   box-shadow: 0 0 1em var(--card-shadow, var(--c-neutral-100));
+}
+
+@media screen and (max-width: 479px) {
+  .card {
+    padding-block: 1em;
+    padding-inline: 1em;
+  }
 }
 
 .card.main {

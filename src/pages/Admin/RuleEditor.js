@@ -96,7 +96,7 @@ const RuleEditor = () => {
     <main className='card main flow'>
       {rules.map((rule, ruleIdx) => (
         <Fragment key={rule.name}>
-          <h2>{rule.name}</h2>
+          <h2 className={s('rule-name')}>{rule.name}</h2>
           <section className='flow'>
             {Object.entries(rule.value).map(([type, counters], idx) => (
               <div className={s('param')} key={idx}>
